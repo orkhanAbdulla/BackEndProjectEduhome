@@ -19,6 +19,8 @@
     <Compile Remove="Migrations\20210510204036_CreateTeacherTable.Designer.cs" />
     <Compile Remove="Migrations\20210511095800_CreateDetailCourseTable.cs" />
     <Compile Remove="Migrations\20210511095800_CreateDetailCourseTable.Designer.cs" />
+    <Compile Remove="Migrations\20210513145358_CreateTableBlogAndBlogDetailRealation.cs" />
+    <Compile Remove="Migrations\20210513145358_CreateTableBlogAndBlogDetailRealation.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

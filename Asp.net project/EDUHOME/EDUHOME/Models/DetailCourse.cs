@@ -20,7 +20,7 @@ namespace EDUHOME.Models
         public int Students { get; set; }
         public string Assesments { get; set; }
         [Required,MaxLength(155)]
-        public string CourseFee { get; set; }
+        public int Price { get; set; }
         public string Certification { get; set; }
         [ForeignKey("Course")]
         public int CourseId { get; set; }

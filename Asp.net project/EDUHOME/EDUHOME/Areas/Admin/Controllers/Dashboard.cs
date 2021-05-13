@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace EDUHOME.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class Dashboard : Controller
+    public class DashboardController : Controller
     {
         public IActionResult Index()
         {

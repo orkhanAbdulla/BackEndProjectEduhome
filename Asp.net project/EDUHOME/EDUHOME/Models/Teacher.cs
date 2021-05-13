@@ -15,5 +15,8 @@ namespace EDUHOME.Models
         public string Fullname { get; set; }
         [Required, MaxLength(155)]
         public string Position { get; set; }
+        public TeacherDetail TeacherDetail { get; set; }
+        public ICollection<TeacherSocial> TeacherSocials { get; set; }
+
     }
 }

@@ -20,7 +20,7 @@ namespace EDUHOME.Controllers
         {
             return View();
         }
-        public IActionResult DetailCourse(int? id)
+        public IActionResult Detail(int? id)
         {
             if (id == null) return NotFound();
             Course course = _context.Courses.Include(c => c.DetailCourse).FirstOrDefault(c => c.Id == id);

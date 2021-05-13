@@ -14,9 +14,21 @@ namespace EDUHOME.DAL
         public DbSet<Slider> Sliders { get; set; }
         public DbSet<Bio> Bio { get; set; }
         public DbSet<Course> Courses { get; set; }
-        public DbSet<Event> Events { get; set; }
-        public DbSet<Teacher> Teachers { get; set; }
         public DbSet<DetailCourse> DetailCourses { get; set; }
+        public DbSet<Event> Events { get; set; }
+        public DbSet<EventDetail> EventDetail { get; set; }
+        public DbSet<Speaker> Speakers { get; set; }
+        public DbSet<EventSpeaker> EventSpeakers { get; set; }
+        public DbSet<Teacher> Teachers { get; set; }
+        public DbSet<TeacherDetail> TeacherDetail {get;set;}
+        public DbSet<Social> Socials { get; set; }
+        public DbSet<Blog> Blogs { get; set; }
+        public DbSet<BlogDetail> BlogDetail { get; set; }
+
+
+
+
+
     }
 
 }
