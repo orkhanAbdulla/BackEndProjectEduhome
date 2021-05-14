@@ -1,6 +1,7 @@
 ﻿using EDUHOME.DAL;
 using EDUHOME.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +18,7 @@ namespace EDUHOME.ViewComponents
         }
         public async Task<IViewComponentResult> InvokeAsync(int take)
         {
-            List<Teacher> model = _context.Teachers.Take(take).ToList();
+            List<Teacher> model = _context.Teachers.Include(t=>t.TeacherSocials).ThenInclude(ts=>ts.Social).Take(take).ToList();
             return View(await Task.FromResult(model));
         }
     }

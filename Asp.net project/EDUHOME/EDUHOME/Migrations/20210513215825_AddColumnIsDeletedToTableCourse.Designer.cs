@@ -4,14 +4,16 @@ using EDUHOME.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EDUHOME.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210513215825_AddColumnIsDeletedToTableCourse")]
+    partial class AddColumnIsDeletedToTableCourse
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -98,6 +100,7 @@ namespace EDUHOME.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ImageUrl")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsDeleted")
@@ -124,50 +127,38 @@ namespace EDUHOME.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Assesments")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(155)")
-                        .HasMaxLength(155);
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Certification")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ClassDuration")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(155)")
-                        .HasMaxLength(155);
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("CourseId")
                         .HasColumnType("int");
 
                     b.Property<string>("Duration")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(155)")
-                        .HasMaxLength(155);
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("HowToApply")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Language")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(155)")
-                        .HasMaxLength(155);
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Price")
                         .HasColumnType("int")
                         .HasMaxLength(155);
 
                     b.Property<string>("SkillLevel")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(155)")
-                        .HasMaxLength(155);
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("Starts")
-                        .HasColumnType("datetime2")
-                        .HasMaxLength(155);
+                    b.Property<string>("Starts")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Students")
-                        .HasColumnType("int")
-                        .HasMaxLength(155);
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 

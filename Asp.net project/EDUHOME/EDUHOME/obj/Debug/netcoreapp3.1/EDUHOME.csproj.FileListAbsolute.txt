@@ -332,3 +332,6 @@ C:\Users\hp\Desktop\Edu\BackEndProjectEduhome\Asp.net project\EDUHOME\EDUHOME\ob
 C:\Users\hp\Desktop\Edu\BackEndProjectEduhome\Asp.net project\EDUHOME\EDUHOME\obj\Debug\netcoreapp3.1\Razor\Views\Teacher\Detail.cshtml.g.cs
 C:\Users\hp\Desktop\Edu\BackEndProjectEduhome\Asp.net project\EDUHOME\EDUHOME\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Components\Blog\Default.cshtml.g.cs
 C:\Users\hp\Desktop\Edu\BackEndProjectEduhome\Asp.net project\EDUHOME\EDUHOME\obj\Debug\netcoreapp3.1\Razor\Views\Blog\Detail.cshtml.g.cs
+C:\Users\hp\Desktop\Edu\BackEndProjectEduhome\Asp.net project\EDUHOME\EDUHOME\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\CourseAdmin\Index.cshtml.g.cs
+C:\Users\hp\Desktop\Edu\BackEndProjectEduhome\Asp.net project\EDUHOME\EDUHOME\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\CourseAdmin\Detail.cshtml.g.cs
+C:\Users\hp\Desktop\Edu\BackEndProjectEduhome\Asp.net project\EDUHOME\EDUHOME\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\CourseAdmin\Create.cshtml.g.cs
