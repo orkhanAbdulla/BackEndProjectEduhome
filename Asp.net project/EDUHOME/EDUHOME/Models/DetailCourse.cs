@@ -12,8 +12,7 @@ namespace EDUHOME.Models
         public int Id { get; set; }
         public string AboutCourse { get; set; }
         public string HowToApply { get; set; }
-        [Required, MaxLength(155)]
-        public DateTime Starts { get; set; }
+        public DateTime? Starts { get; set; }
         [Required, MaxLength(155)]
         public string Duration { get; set; }
         [Required, MaxLength(155)]
@@ -22,11 +21,11 @@ namespace EDUHOME.Models
         public string SkillLevel { get; set; }
         [Required, MaxLength(155)]
         public string Language { get; set; }
-        [Required, MaxLength(155)]
+        [Required]
         public int Students { get; set; }
         [Required, MaxLength(155)]
         public string Assesments { get; set; }
-        [Required,MaxLength(155)]
+        [Required]
         public int Price { get; set; }
         public string Certification { get; set; }
         [ForeignKey("Course")]

@@ -45,7 +45,7 @@
                             {
                             <tr>
                                 <td>
-                                    <img  style="width: 120px; height: 115px; object-fit:cover" src="~/img/course/@cr.ImageUrl" a />
+                                    <img style="width: 120px; height: 115px; object-fit:cover" src="~/img/course/@cr.ImageUrl" a />
                                 </td>
                                 <td>
                                     @cr.Name
@@ -62,20 +62,40 @@
                                 <td>
                                     @cr.DetailCourse.Price
                                 </td>
-                                <td class="text-success">
-                                    Active
-                                </td>
+                                @if (cr.IsDeleted)
+                                {
+                                    <td class="text-danger">
+                                        Deactive
+                                    </td>
+
+                                }
+                                else
+                                {
+                                    <td class="text-success">
+                                        Active
+                                    </td>
+                                }
                                 <td>
-                                    <a class="btn btn-success" asp-action="Detail" asp-route-id="@cr.Id">
-                                        <i class="mdi mdi-account-card-details"></i>
+                                    <a class="btn btn-info" asp-action="Detail" asp-route-id="@cr.Id">
+                                        Detail
                                     </a>
 
                                     <a class="btn btn-warning" asp-action="Update" asp-route-id="@cr.Id">
-                                        <i class="mdi mdi-table-edit"></i>
+                                        Edit
                                     </a>
-                                    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@cr.Id">
-                                        <i class="mdi mdi-delete-sweep"></i>
-                                    </a>
+                                    @if (cr.IsDeleted)
+                                    {
+                                        <a class="btn btn-success" asp-action="Activity" asp-route-id="@cr.Id">
+                                            Activated
+                                        </a>
+                                    }
+                                    else
+                                    {
+                                        <a class="btn btn-danger" asp-action="Activity" asp-route-id="@cr.Id">
+                                            Deactivated
+                                        </a>
+                                    }
+
                                 </td>
                             </tr>
                             }

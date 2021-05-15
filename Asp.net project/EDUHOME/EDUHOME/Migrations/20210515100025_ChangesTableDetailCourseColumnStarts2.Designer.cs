@@ -4,14 +4,16 @@ using EDUHOME.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EDUHOME.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210515100025_ChangesTableDetailCourseColumnStarts2")]
+    partial class ChangesTableDetailCourseColumnStarts2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -153,7 +155,8 @@ namespace EDUHOME.Migrations
                         .HasMaxLength(155);
 
                     b.Property<int>("Price")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasMaxLength(155);
 
                     b.Property<string>("SkillLevel")
                         .IsRequired()
@@ -164,7 +167,8 @@ namespace EDUHOME.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<int>("Students")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasMaxLength(155);
 
                     b.HasKey("Id");
 
