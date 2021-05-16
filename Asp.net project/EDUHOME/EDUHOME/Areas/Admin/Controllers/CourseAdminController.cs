@@ -18,7 +18,7 @@ namespace EDUHOME.Areas.Admin.Controllers
     public class CourseAdminController : Controller
     {
         private readonly AppDbContext _context;
-        public readonly IWebHostEnvironment _env;
+        private readonly IWebHostEnvironment _env;
         public CourseAdminController(AppDbContext context, IWebHostEnvironment env)
         {
             _context = context;
@@ -32,7 +32,7 @@ namespace EDUHOME.Areas.Admin.Controllers
         public IActionResult Detail(int? id)
         {
             if (id == null) return NotFound();
-            List<Course> courses = _context.Courses.Where(c => c.IsDeleted == false).Include(c => c.DetailCourse).ToList();
+            Course courses = _context.Courses.Where(c => c.IsDeleted == false).Include(c => c.DetailCourse).FirstOrDefault(c=>c.Id==id);
             if (courses == null) return NotFound();
             return View(courses);
 

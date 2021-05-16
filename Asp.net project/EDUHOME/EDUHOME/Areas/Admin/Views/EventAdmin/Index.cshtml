@@ -1,0 +1,147 @@
+﻿@model List<Event>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="row">
+    <div class="col-lg-12 grid-margin stretch-card ">
+        <div class="card ">
+            <div class="card-body ">
+                <h4 class="card-title">Courses</h4>
+                <a asp-controller="CourseAdmin" asp-action="Create" class="btn btn-success">Create</a>
+                <div class="table-responsive">
+                    <table class="table table-striped ">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Image
+                                </th>
+                                <th>
+                                    Event
+                                </th>
+                                <th>
+                                    Time
+                                </th>
+                                <th>
+                                    Venue
+                                </th>
+                                <th>
+                                    Speakers
+                                </th>
+                                <th>
+                                    IsDeleted
+                                </th>
+                                <th>
+                                    Settings
+                                </th>
+
+                            </tr>
+
+                        </thead>
+                        <tbody>
+                            @foreach (Event ev in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        <img style="width: 100px; height: 100px; object-fit:cover" src="~/img/event/@ev.ImageUrl" a />
+                                    </td>
+                                    <td>
+                                        @ev.Lesson
+                                    </td>
+                                    <td>
+                                        @ev.EventTime.ToString("dd") @ev.EventTime.ToString("MMM") @ev.EventTime.ToString("t") - @ev.EventEndTime.ToString("t")
+                                    </td>
+                                    <td>
+                                        @ev.Venue
+                                    </td>
+                                    <td>
+                                        <!-- Button trigger modal -->
+                                        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#speaker-@ev.Id">
+                                            SPEAKER INFO
+                                        </button>
+
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="speaker-@ev.Id" tabindex="-1" role="dialog" aria-labelledby="speaker-@ev.Id" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        @foreach (EventSpeaker es in ev.EventSpeakers)
+                                                        {
+                                                            <div class="row mt-5">
+                                                                <div class="col-6">
+                                                                    @Html.Raw("<p>Speaker Name</p>")
+                                                                    <h3>@es.Speaker.Fullname</h3>
+                                                                    @Html.Raw("<p>Speaker Occupation</p>")
+                                                                    <h3>@es.Speaker.Occupation</h3>
+                                                                </div>
+                                                                <div class="col-6">
+                                                                    <img style="width: 140px; height: 140px; object-fit:cover" src="~/img/event/@es.Speaker.ImageUrl" a />
+                                                                </div>
+                                                            </div>
+                                                        }
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                        <button type="button" class="btn btn-primary">Save changes</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    
+                                    </td>
+                                    
+                                    @if (ev.IsDeleted)
+                                    {
+                                        <td class="text-danger">
+                                            Deactive
+                                        </td>
+
+                                    }
+                                    else
+                                    {
+                                        <td class="text-success">
+                                            Active
+                                        </td>
+                                    }
+                                    <td>
+                                        <a class="btn btn-info" asp-action="Detail" asp-route-id="@ev.Id">
+                                            Detail
+                                        </a>
+
+                                        <a class="btn btn-warning" asp-action="Update" asp-route-id="@ev.Id">
+                                            Edit
+                                        </a>
+                                        @if (ev.IsDeleted)
+                                        {
+                                            <a class="btn btn-success" asp-action="Activity" asp-route-id="@ev.Id">
+                                                Activated
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <a class="btn btn-danger" asp-action="Activity" asp-route-id="@ev.Id">
+                                                Deactivated
+                                            </a>
+                                        }
+
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
