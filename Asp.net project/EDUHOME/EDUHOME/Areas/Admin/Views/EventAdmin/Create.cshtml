@@ -1,4 +1,4 @@
-﻿@model Event
+﻿@model EventVM
 @{
     ViewData["Title"] = "Create";
 }
@@ -10,29 +10,29 @@
                 <div class="text-danger" asp-validation-summary="ModelOnly"></div>
                 <form class="forms-sample" method="post" enctype="multipart/form-data">
                     <div class="form-group">
-                        <label asp-for="Photo">Select Image:</label>
-                        <input asp-for="Photo" class="form-control" accept="image/*">
-                        <span class="text-danger" asp-validation-for="Photo"></span>
+                        <label asp-for="Event.Photo">Select Image:</label>
+                        <input asp-for="Event.Photo" class="form-control" accept="image/*">
+                        <span class="text-danger" asp-validation-for="Event.Photo"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="Lesson"></label>
-                        <input asp-for="Lesson" class="form-control" placeholder="Lesson">
-                        <span class="text-danger" asp-validation-for="Lesson"></span>
+                        <label >Event</label>
+                        <input asp-for="Event.Lesson" class="form-control" placeholder="Lesson">
+                        <span class="text-danger" asp-validation-for="Event.Lesson"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="EventTime"></label>
-                        <input asp-for="EventTime" class="form-control" placeholder="EventTime">
-                        <span class="text-danger" asp-validation-for="EventTime"></span>
+                        <label asp-for="Event.EventTime"></label>
+                        <input asp-for="Event.EventTime" class="form-control" placeholder="EventTime">
+                        <span class="text-danger" asp-validation-for="Event.EventTime"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="EventEndTime"></label>
-                        <input asp-for="EventEndTime" class="form-control" placeholder="EventEndTime">
-                        <span class="text-danger" asp-validation-for="EventEndTime"></span>
+                        <label asp-for="Event.EventEndTime"></label>
+                        <input asp-for="Event.EventEndTime" class="form-control" placeholder="EventEndTime">
+                        <span class="text-danger" asp-validation-for="Event.EventEndTime"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="Venue"></label>
-                        <input asp-for="Venue" class="form-control" placeholder="City">
-                        <span class="text-danger" asp-validation-for="Venue"></span>
+                        <label asp-for="Event.Venue"></label>
+                        <input asp-for="Event.Venue" class="form-control" placeholder="City">
+                        <span class="text-danger" asp-validation-for="Event.Venue"></span>
                     </div>
                     <div class="form-group">
                         <label asp-for="EventDetail.ExactLocation"></label>
@@ -45,8 +45,8 @@
                         <span class="text-danger" asp-validation-for="EventDetail.Description"></span>
                     </div>
                     <div class="form-group " id="Speakers">
-                        <label for="mainCategory">Select Speakers</label>
-                        <select class="form-control" name="SpeakerId" id="SpeakerId">
+                        <label for="Speakers">Select Speakers</label>
+                        <select class="form-control" asp-for="Speakers" id="SpeakerId">
                             @foreach (Speaker spk in ViewBag.Speakers)
                             {
                                 <option value="@spk.Id">@spk.Fullname</option>

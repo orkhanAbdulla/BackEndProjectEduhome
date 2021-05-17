@@ -26,6 +26,7 @@ namespace EDUHOME.Areas.Admin.Controllers
         }
         public IActionResult Index()
         {
+            ////ViewBag.IsDeleted = IsDeleted;
             List<Course> courses = _context.Courses.Include(c => c.DetailCourse).ToList();
             return View(courses);
         }
@@ -71,17 +72,24 @@ namespace EDUHOME.Areas.Admin.Controllers
 
             return RedirectToAction(nameof(Index));
         }
-        public IActionResult Activity(int? id)
+        public async Task<IActionResult> Delete(int? id)
         {
             if (id == null) return NotFound();
-            Course course = _context.Courses.FirstOrDefault(c => c.Id == id);
+            Course course = await _context.Courses.FirstOrDefaultAsync(c => c.Id == id);
             if (course == null) return NotFound();
-            course.IsDeleted = course.IsDeleted == true ? false : true;
+            if (!course.IsDeleted)
+            {
+                course.IsDeleted = true;
+
+            }
+            else
+            {
+                course.IsDeleted = false;
+
+            }
             _context.Courses.Update(course);
-            _context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
-            
-         
         }
         public IActionResult Update(int? id)
         {
@@ -98,18 +106,21 @@ namespace EDUHOME.Areas.Admin.Controllers
             if (id == null) return NotFound();
             Course CourseServer = _context.Courses.Include(c => c.DetailCourse).FirstOrDefault(c=>c.Id== id);
             if (CourseServer == null) return NotFound();
-            string path = Path.Combine("img", "course");
-            Helper.DeleteFile(_env.WebRootPath, path, CourseServer.ImageUrl);
+          
 
-            if (!ModelState.IsValid) return View();
+            if (!ModelState.IsValid) return View(CourseServer);
             if (!course.Photo.IsValidType("image/"))
             {
                 ModelState.AddModelError("Photo", "Please select image Type");
+                return View(CourseServer);
             }
             if (!course.Photo.IsValidSize(300))
             {
                 ModelState.AddModelError("Photo", "Please select image Size less than kb");
+                return View(CourseServer);
             }
+            string path = Path.Combine("img", "course");
+            Helper.DeleteFile(_env.WebRootPath, path, CourseServer.ImageUrl);
             path = Path.Combine("img", "course");
             CourseServer.ImageUrl = await course.Photo.SavaFileAsync(_env.WebRootPath, path);
 

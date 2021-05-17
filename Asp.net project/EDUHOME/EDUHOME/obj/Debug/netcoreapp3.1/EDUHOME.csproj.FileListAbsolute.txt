@@ -338,3 +338,4 @@ C:\Users\hp\Desktop\Edu\BackEndProjectEduhome\Asp.net project\EDUHOME\EDUHOME\ob
 C:\Users\hp\Desktop\Edu\BackEndProjectEduhome\Asp.net project\EDUHOME\EDUHOME\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\CourseAdmin\Update.cshtml.g.cs
 C:\Users\hp\Desktop\Edu\BackEndProjectEduhome\Asp.net project\EDUHOME\EDUHOME\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\EventAdmin\Index.cshtml.g.cs
 C:\Users\hp\Desktop\Edu\BackEndProjectEduhome\Asp.net project\EDUHOME\EDUHOME\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\EventAdmin\Create.cshtml.g.cs
+C:\Users\hp\Desktop\Edu\BackEndProjectEduhome\Asp.net project\EDUHOME\EDUHOME\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\EventAdmin\Detail.cshtml.g.cs

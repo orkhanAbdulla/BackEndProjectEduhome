@@ -1,6 +1,7 @@
 ﻿using EDUHOME.DAL;
 using EDUHOME.Extensions;
 using EDUHOME.Models;
+using EDUHOME.ViewModels;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -27,6 +28,14 @@ namespace EDUHOME.Areas.Admin.Controllers
             List<Event> Event = _context.Events.Include(e => e.EventDetail).Include(e => e.EventSpeakers).ThenInclude(e => e.Speaker).ToList();
             return View(Event);
         }
+        public IActionResult Detail(int? id)
+        {
+            if (id == null) return NotFound();
+            Event Event = _context.Events.Include(e => e.EventDetail).Include(e => e.EventSpeakers).ThenInclude(es => es.Speaker).FirstOrDefault(e => e.Id == id);
+            if (Event == null) return NotFound();
+
+            return View(Event);
+        }
         public IActionResult Create()
         {
             ViewBag.Speakers = _context.Speakers.ToList();
@@ -34,35 +43,55 @@ namespace EDUHOME.Areas.Admin.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Event Event, int? SpeakerId)
+        public async Task<IActionResult> Create(EventVM eventVM)
         {
             ViewBag.Speakers = _context.Speakers.ToList();
+
+            
             if (!ModelState.IsValid) return View();
-            if (SpeakerId==null)
+
+            if (eventVM.Event.Photo == null)
             {
-                ModelState.AddModelError("", "Please Select Speakers");
+                ModelState.AddModelError("Event.Photo", "Please select Photo");
                 return View();
             }
-            if (!Event.Photo.IsValidType("image/"))
+            if (!eventVM.Event.Photo.IsValidType("image/"))
             {
-                ModelState.AddModelError("Photo", "Please select image Type");
+                ModelState.AddModelError("Event.Photo", "Please select image Type");
+                return View();
             }
-            if (!Event.Photo.IsValidSize(300))
+            if (!eventVM.Event.Photo.IsValidSize(300))
             {
-                ModelState.AddModelError("Photo", "Please select image Size less than kb");
+                ModelState.AddModelError("Event.Photo", "Please select image Size less than kb");
+                return View();
+            }
+            if (eventVM.Speakers == null)
+            {
+                ModelState.AddModelError("Speakers", "Please Select Speakers");
+                return View();
             }
             string path = Path.Combine("img", "event");
-            Event.ImageUrl = await Event.Photo.SavaFileAsync(_env.WebRootPath, path);
-            Event.EventDetail.Event = Event;
-            Event.EventDetail.EventId = Event.Id;
-            foreach (EventSpeaker es in Event.EventSpeakers)
-            {
-                es.Speaker.Id = (int)SpeakerId;
-                es.SpeakerId = (int)SpeakerId;
+            eventVM.Event.ImageUrl = await eventVM.Event.Photo.SavaFileAsync(_env.WebRootPath, path);
 
-                await _context.AddRangeAsync(Event, Event.EventDetail, es.Speaker);
-            }
+            await _context.Events.AddAsync(eventVM.Event);
+            await _context.SaveChangesAsync();
            
+
+            eventVM.EventDetail.EventId = eventVM.Event.Id;
+
+
+
+
+            EventSpeaker eventSpeaker = new EventSpeaker();
+            eventSpeaker.EventId = eventVM.Event.Id;
+            foreach (int sp in eventVM.Speakers)
+            {
+                eventSpeaker.SpeakerId = sp;
+                await _context.EventSpeakers.AddAsync(eventSpeaker);
+            }
+            
+      
+            await _context.EventDetail.AddAsync(eventVM.EventDetail);
             await _context.SaveChangesAsync();
 
 

@@ -83,15 +83,16 @@
                                     <a class="btn btn-warning" asp-action="Update" asp-route-id="@cr.Id">
                                         Edit
                                     </a>
+                                    
                                     @if (cr.IsDeleted)
                                     {
-                                        <a class="btn btn-success" asp-action="Activity" asp-route-id="@cr.Id">
+                                        <a class="btn btn-success" asp-controller="CourseAdmin" asp-action="Delete" asp-route-id="@cr.Id">
                                             Activated
                                         </a>
                                     }
                                     else
                                     {
-                                        <a class="btn btn-danger" asp-action="Activity" asp-route-id="@cr.Id">
+                                        <a class="btn btn-danger" asp-controller="CourseAdmin" asp-action="Delete" asp-route-id="@cr.Id">
                                             Deactivated
                                         </a>
                                     }
