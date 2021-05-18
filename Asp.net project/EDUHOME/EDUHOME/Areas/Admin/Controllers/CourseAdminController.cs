@@ -96,7 +96,6 @@ namespace EDUHOME.Areas.Admin.Controllers
             if (id == null) return NotFound();
             Course course = _context.Courses.Include(c => c.DetailCourse).FirstOrDefault(c => c.Id == id);
             if (course == null) return NotFound();
-
             return View(course);
         }
         [HttpPost]
