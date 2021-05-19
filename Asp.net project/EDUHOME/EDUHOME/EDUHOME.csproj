@@ -25,6 +25,10 @@
     <Compile Remove="Migrations\20210515093304_datetimeChanges.Designer.cs" />
     <Compile Remove="Migrations\20210515093608_Test.cs" />
     <Compile Remove="Migrations\20210515093608_Test.Designer.cs" />
+    <Compile Remove="Migrations\20210518202349_ChangeTeacherRelation.cs" />
+    <Compile Remove="Migrations\20210518202349_ChangeTeacherRelation.Designer.cs" />
+    <Compile Remove="Migrations\20210519075339_ChangeTeacherTable.cs" />
+    <Compile Remove="Migrations\20210519075339_ChangeTeacherTable.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

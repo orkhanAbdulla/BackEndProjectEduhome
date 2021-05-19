@@ -57,10 +57,12 @@ namespace EDUHOME.Areas.Admin.Controllers
             if (!course.Photo.IsValidType("image/"))
             {
                 ModelState.AddModelError("Photo", "Please select image Type");
+                return View();
             }
             if (!course.Photo.IsValidSize(300))
             {
                 ModelState.AddModelError("Photo", "Please select image Size less than kb");
+                return View();
             }
             string path = Path.Combine("img", "course");
             course.ImageUrl = await course.Photo.SavaFileAsync(_env.WebRootPath, path);
@@ -123,8 +125,8 @@ namespace EDUHOME.Areas.Admin.Controllers
             path = Path.Combine("img", "course");
             CourseServer.ImageUrl = await course.Photo.SavaFileAsync(_env.WebRootPath, path);
 
-            course = CourseServer;
-            course.DetailCourse = CourseServer.DetailCourse;
+            //course = CourseServer;
+            //course.DetailCourse = CourseServer.DetailCourse;
             _context.UpdateRange(course, course.DetailCourse);
             await _context.SaveChangesAsync();
 

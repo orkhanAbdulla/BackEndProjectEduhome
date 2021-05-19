@@ -23,7 +23,7 @@ namespace EDUHOME.Controllers
         public IActionResult Detail(int? id)
         {
             if (id == null) return NotFound();
-            Teacher teacher = _context.Teachers.Include(t => t.TeacherDetail).Include(t => t.TeacherSocials).ThenInclude(t => t.Social).FirstOrDefault(t => t.Id == id);
+            Teacher teacher = _context.Teachers.Include(t => t.TeacherDetail).Include(t => t.socials).FirstOrDefault(t => t.Id == id);
             if (teacher == null) return NotFound();
 
             return View(teacher);

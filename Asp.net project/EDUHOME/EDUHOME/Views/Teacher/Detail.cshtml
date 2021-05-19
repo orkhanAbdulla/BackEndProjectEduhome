@@ -52,9 +52,9 @@
                     <p><span>make a call : </span>@Model.TeacherDetail.Call</p>
                     <p><span>skype : </span>@Model.TeacherDetail.Skype</p>
                     <ul>
-                        @foreach (var tc in Model.TeacherSocials)
+                        @foreach (Social tc in Model.socials)
                         {
-                        <li><a href="@tc.Social.Link"><i class="@tc.Social.Icon"></i></a></li>
+                        <li><a href="@tc.Link"><i class="@tc.Icon"></i></a></li>
                         }
                         
                      
@@ -71,8 +71,8 @@
                             <div class="skill-bar-item">
                                 <span>language</span>
                                 <div class="progress">
-                                    <div data-wow-delay="1.2s" data-wow-duration="1.5s" style="width: @Model.TeacherDetail.Language; visibility: visible; animation-duration: 1.5s; animation-delay: 1.2s; animation-name: fadeInLeft;" data-progress="50%" class="progress-bar wow fadeInLeft">
-                                        <span class="text-top">@Model.TeacherDetail.Language</span>
+                                    <div data-wow-delay="1.2s" data-wow-duration="1.5s" style="width:@Model.TeacherDetail.Language%; visibility: visible; animation-duration: 1.5s; animation-delay: 1.2s; animation-name: fadeInLeft;" data-progress="50%" class="progress-bar wow fadeInLeft">
+                                        <span class="text-top">@Model.TeacherDetail.Language%</span>
                                     </div>
                                 </div>
                             </div>
@@ -81,8 +81,8 @@
                             <div class="skill-bar-item">
                                 <span>team leader</span>
                                 <div class="progress">
-                                    <div data-wow-delay="1.2s" data-wow-duration="1.5s" style="width: @Model.TeacherDetail.TeamLeader; visibility: visible; animation-duration: 1.5s; animation-delay: 1.2s; animation-name: fadeInLeft;" data-progress="50%" class="progress-bar wow fadeInLeft">
-                                        <span class="text-top">@Model.TeacherDetail.TeamLeader</span>
+                                    <div data-wow-delay="1.2s" data-wow-duration="1.5s" style="width: @Model.TeacherDetail.TeamLeader%; visibility: visible; animation-duration: 1.5s; animation-delay: 1.2s; animation-name: fadeInLeft;" data-progress="50%" class="progress-bar wow fadeInLeft">
+                                        <span class="text-top">@Model.TeacherDetail.TeamLeader%</span>
                                     </div>
                                 </div>
                             </div>
@@ -91,8 +91,8 @@
                             <div class="skill-bar-item">
                                 <span>development</span>
                                 <div class="progress">
-                                    <div data-wow-delay="1.2s" data-wow-duration="1.5s" style="width: @Model.TeacherDetail.Development; visibility: visible; animation-duration: 1.5s; animation-delay: 1.2s; animation-name: fadeInLeft;" data-progress="50%" class="progress-bar wow fadeInLeft">
-                                        <span class="text-top">@Model.TeacherDetail.Development</span>
+                                    <div data-wow-delay="1.2s" data-wow-duration="1.5s" style="width: @Model.TeacherDetail.Development%; visibility: visible; animation-duration: 1.5s; animation-delay: 1.2s; animation-name: fadeInLeft;" data-progress="50%" class="progress-bar wow fadeInLeft">
+                                        <span class="text-top">@Model.TeacherDetail.Development%</span>
                                     </div>
                                 </div>
                             </div>
@@ -101,8 +101,8 @@
                             <div class="skill-bar-item">
                                 <span>design</span>
                                 <div class="progress">
-                                    <div data-wow-delay="1.2s" data-wow-duration="1.5s" style="width: @Model.TeacherDetail.Design; visibility: visible; animation-duration: 1.5s; animation-delay: 1.2s; animation-name: fadeInLeft;" data-progress="50%" class="progress-bar wow fadeInLeft">
-                                        <span class="text-top">@Model.TeacherDetail.Design</span>
+                                    <div data-wow-delay="1.2s" data-wow-duration="1.5s" style="width: @Model.TeacherDetail.Design%; visibility: visible; animation-duration: 1.5s; animation-delay: 1.2s; animation-name: fadeInLeft;" data-progress="50%" class="progress-bar wow fadeInLeft">
+                                        <span class="text-top">@Model.TeacherDetail.Design%</span>
                                     </div>
                                 </div>
                             </div>
@@ -111,8 +111,8 @@
                             <div class="skill-bar-item">
                                 <span>innovation</span>
                                 <div class="progress">
-                                    <div data-wow-delay="1.2s" data-wow-duration="1.5s" style="width: @Model.TeacherDetail.Innovation; visibility: visible; animation-duration: 1.5s; animation-delay: 1.2s; animation-name: fadeInLeft;" data-progress="50%" class="progress-bar wow fadeInLeft">
-                                        <span class="text-top">@Model.TeacherDetail.Innovation</span>
+                                    <div data-wow-delay="1.2s" data-wow-duration="1.5s" style="width: @Model.TeacherDetail.Innovation%; visibility: visible; animation-duration: 1.5s; animation-delay: 1.2s; animation-name: fadeInLeft;" data-progress="50%" class="progress-bar wow fadeInLeft">
+                                        <span class="text-top">@Model.TeacherDetail.Innovation%</span>
                                     </div>
                                 </div>
                             </div>
@@ -121,8 +121,8 @@
                             <div class="skill-bar-item">
                                 <span>communication</span>
                                 <div class="progress">
-                                    <div data-wow-delay="1.2s" data-wow-duration="1.5s" style="width: @Model.TeacherDetail.Communication; visibility: visible; animation-duration: 1.5s; animation-delay: 1.2s; animation-name: fadeInLeft;" data-progress="50%" class="progress-bar wow fadeInLeft">
-                                        <span class="text-top">@Model.TeacherDetail.Communication</span>
+                                    <div data-wow-delay="1.2s" data-wow-duration="1.5s" style="width: @Model.TeacherDetail.Communication%; visibility: visible; animation-duration: 1.5s; animation-delay: 1.2s; animation-name: fadeInLeft;" data-progress="50%" class="progress-bar wow fadeInLeft">
+                                        <span class="text-top">@Model.TeacherDetail.Communication%</span>
                                     </div>
                                 </div>
                             </div>

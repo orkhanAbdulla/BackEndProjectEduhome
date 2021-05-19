@@ -17,12 +17,12 @@ namespace EDUHOME.Models
         public string MailMe { get; set; }
         public string Call { get; set; }
         public string Skype { get; set; }
-        public string Language { get; set; }
-        public string Design { get; set; }
-        public string TeamLeader { get; set; }
-        public string Innovation { get; set; }
-        public string Development { get; set; }
-        public string Communication { get; set; }
+        public int Language { get; set; }
+        public int Design { get; set; }
+        public int TeamLeader { get; set; }
+        public int Innovation { get; set; }
+        public int Development { get; set; }
+        public int Communication { get; set; }
         [ForeignKey("Teacher")]
         public int TeacherId { get; set; }
         public Teacher Teacher { get; set; }

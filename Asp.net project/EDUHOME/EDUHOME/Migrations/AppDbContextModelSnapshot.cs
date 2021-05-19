@@ -295,7 +295,12 @@ namespace EDUHOME.Migrations
                     b.Property<string>("Link")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("TeacherId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("TeacherId");
 
                     b.ToTable("Socials");
                 });
@@ -334,9 +339,10 @@ namespace EDUHOME.Migrations
                         .HasMaxLength(155);
 
                     b.Property<string>("ImageUrl")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(155)")
-                        .HasMaxLength(155);
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Position")
                         .IsRequired()
@@ -361,17 +367,17 @@ namespace EDUHOME.Migrations
                     b.Property<string>("Call")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Communication")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Communication")
+                        .HasColumnType("int");
 
                     b.Property<string>("Degree")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Design")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Design")
+                        .HasColumnType("int");
 
-                    b.Property<string>("Development")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Development")
+                        .HasColumnType("int");
 
                     b.Property<string>("Experience")
                         .HasColumnType("nvarchar(max)");
@@ -382,11 +388,11 @@ namespace EDUHOME.Migrations
                     b.Property<string>("Hobbies")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Innovation")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Innovation")
+                        .HasColumnType("int");
 
-                    b.Property<string>("Language")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Language")
+                        .HasColumnType("int");
 
                     b.Property<string>("MailMe")
                         .HasColumnType("nvarchar(max)");
@@ -397,8 +403,8 @@ namespace EDUHOME.Migrations
                     b.Property<int>("TeacherId")
                         .HasColumnType("int");
 
-                    b.Property<string>("TeamLeader")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("TeamLeader")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -406,28 +412,6 @@ namespace EDUHOME.Migrations
                         .IsUnique();
 
                     b.ToTable("TeacherDetail");
-                });
-
-            modelBuilder.Entity("EDUHOME.Models.TeacherSocial", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("SocialId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TeacherId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("SocialId");
-
-                    b.HasIndex("TeacherId");
-
-                    b.ToTable("TeacherSocial");
                 });
 
             modelBuilder.Entity("EDUHOME.Models.BlogDetail", b =>
@@ -472,26 +456,20 @@ namespace EDUHOME.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("EDUHOME.Models.Social", b =>
+                {
+                    b.HasOne("EDUHOME.Models.Teacher", "Teacher")
+                        .WithMany("socials")
+                        .HasForeignKey("TeacherId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("EDUHOME.Models.TeacherDetail", b =>
                 {
                     b.HasOne("EDUHOME.Models.Teacher", "Teacher")
                         .WithOne("TeacherDetail")
                         .HasForeignKey("EDUHOME.Models.TeacherDetail", "TeacherId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("EDUHOME.Models.TeacherSocial", b =>
-                {
-                    b.HasOne("EDUHOME.Models.Social", "Social")
-                        .WithMany("TeacherSocials")
-                        .HasForeignKey("SocialId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("EDUHOME.Models.Teacher", "Teacher")
-                        .WithMany("TeacherSocials")
-                        .HasForeignKey("TeacherId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

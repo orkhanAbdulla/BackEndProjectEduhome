@@ -1,0 +1,121 @@
+﻿@model Teacher
+@{
+    ViewData["Title"] = "Create";
+}
+<div class="row">
+    <div class="col-12 grid-margin stretch-card">
+        <div class="card ">
+            <div class="card-body">
+                <h4 class="card-title">Create Teacher</h4>
+                <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+                <form class="forms-sample" method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label asp-for="Photo">Select Image:</label>
+                        <input asp-for="Photo" class="form-control" accept="image/*">
+                        <span class="text-danger" asp-validation-for="Photo"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Fullname"></label>
+                        <input asp-for="Fullname" class="form-control" placeholder="Fullname">
+                        <span class="text-danger" asp-validation-for="Fullname"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Position"></label>
+                        <input asp-for="Position" class="form-control" placeholder="Position">
+                        <span class="text-danger" asp-validation-for="Position"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="TeacherDetail.AboutMe"></label>
+                        <input asp-for="TeacherDetail.AboutMe" class="form-control" placeholder="AboutMe">
+                        <span class="text-danger" asp-validation-for="TeacherDetail.AboutMe"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="TeacherDetail.Degree"></label>
+                        <input asp-for="TeacherDetail.Degree" class="form-control" placeholder="Degree">
+                        <span class="text-danger" asp-validation-for="TeacherDetail.Degree"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="TeacherDetail.Experience"></label>
+                        <input asp-for="TeacherDetail.Experience" class="form-control" placeholder="Experience">
+                        <span class="text-danger" asp-validation-for="TeacherDetail.Experience"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="TeacherDetail.Hobbies"></label>
+                        <input asp-for="TeacherDetail.Hobbies" class="form-control" placeholder="Hobbies">
+                        <span class="text-danger" asp-validation-for="TeacherDetail.Hobbies"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="TeacherDetail.Faculty"></label>
+                        <input asp-for="TeacherDetail.Faculty" class="form-control" placeholder="Faculty">
+                        <span class="text-danger" asp-validation-for="TeacherDetail.Faculty"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="TeacherDetail.MailMe"></label>
+                        <input asp-for="TeacherDetail.MailMe" class="form-control" placeholder="MailMe">
+                        <span class="text-danger" asp-validation-for="TeacherDetail.MailMe"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="TeacherDetail.Call"></label>
+                        <input asp-for="TeacherDetail.Call" class="form-control" placeholder="Call">
+                        <span class="text-danger" asp-validation-for="TeacherDetail.Call"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="TeacherDetail.Skype"></label>
+                        <input asp-for="TeacherDetail.Skype" class="form-control" placeholder="Skype">
+                        <span class="text-danger" asp-validation-for="TeacherDetail.Skype"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="TeacherDetail.Language"></label>
+                        <input type="range" asp-for="TeacherDetail.Language" class="form-control-range" placeholder="Language">
+                        <span class="text-danger" asp-validation-for="TeacherDetail.Language"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="TeacherDetail.Design"></label>
+                        <input type="range" asp-for="TeacherDetail.Design" class="form-control-range" placeholder="Design">
+                        <span class="text-danger" asp-validation-for="TeacherDetail.Design"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="TeacherDetail.TeamLeader"></label>
+                        <input type="range" asp-for="TeacherDetail.TeamLeader" class="form-control-range" placeholder="TeamLeader">
+                        <span  class="text-danger" asp-validation-for="TeacherDetail.TeamLeader"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="TeacherDetail.Innovation"></label>
+                        <input type="range" asp-for="TeacherDetail.Innovation" class="form-control-range" placeholder="Innovation">
+                        <span class="text-danger" asp-validation-for="TeacherDetail.Innovation"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="TeacherDetail.Development"></label>
+                        <input type="range" asp-for="TeacherDetail.Development" class="form-control-range" placeholder="Development">
+                        <span class="text-danger" asp-validation-for="TeacherDetail.Development"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="TeacherDetail.Communication"></label>
+                        <input type="range" asp-for="TeacherDetail.Communication" class="form-control-range" placeholder="Communication">
+                        <span class="text-danger" asp-validation-for="TeacherDetail.Communication"></span>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                    <a class="btn btn-light" asp-action="Index">Cancel</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@section Script{
+    <script src="https://cdn.ckeditor.com/ckeditor5/27.1.0/classic/ckeditor.js"></script>
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#editor'))
+            .catch(error => {
+                console.error(error);
+            });
+    </script>
+    <partial name="_ValidationPartial" />
+
+}
+
+
+
+
+

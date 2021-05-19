@@ -12,9 +12,9 @@
                 <h2><a href="teacher-details.html">@tr.Fullname</a></h2>
                 <h4>@tr.Position</h4>
                 <ul>
-                    @foreach (TeacherSocial tc in tr.TeacherSocials)
+                    @foreach (Social s in tr.socials)
                     {
-                        <li><a href="@tc.Social.Link"><i class="@tc.Social.Icon"></i></a></li>
+                        <li><a href="@s.Link"><i class="@s.Icon"></i></a></li>
                     }
 
 
