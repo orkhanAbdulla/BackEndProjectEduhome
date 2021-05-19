@@ -124,10 +124,20 @@ namespace EDUHOME.Areas.Admin.Controllers
             Helper.DeleteFile(_env.WebRootPath, path, CourseServer.ImageUrl);
             path = Path.Combine("img", "course");
             CourseServer.ImageUrl = await course.Photo.SavaFileAsync(_env.WebRootPath, path);
+            CourseServer.Name = course.Name;
+            CourseServer.Description = course.Description;
+            CourseServer.DetailCourse.AboutCourse = course.DetailCourse.AboutCourse;
+            CourseServer.DetailCourse.HowToApply = course.DetailCourse.HowToApply;
+            CourseServer.DetailCourse.Certification = course.DetailCourse.Certification;
+            CourseServer.DetailCourse.Starts = course.DetailCourse.Starts;
+            CourseServer.DetailCourse.Duration = course.DetailCourse.Duration;
+            CourseServer.DetailCourse.ClassDuration = course.DetailCourse.ClassDuration;
+            CourseServer.DetailCourse.SkillLevel = course.DetailCourse.SkillLevel;
+            CourseServer.DetailCourse.Language = course.DetailCourse.Language;
+            CourseServer.DetailCourse.Students = course.DetailCourse.Students;
+            CourseServer.DetailCourse.Assesments = course.DetailCourse.Assesments;
+            CourseServer.DetailCourse.Price = course.DetailCourse.Price;
 
-            //course = CourseServer;
-            //course.DetailCourse = CourseServer.DetailCourse;
-            _context.UpdateRange(course, course.DetailCourse);
             await _context.SaveChangesAsync();
 
             return RedirectToAction(nameof(Index));
