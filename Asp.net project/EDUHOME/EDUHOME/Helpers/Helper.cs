@@ -21,8 +21,7 @@ namespace EDUHOME.Helpers
     public enum Roles
     {
         Admin,
-        Maneger,
-        Member
-
+        Member,
+        Moderator
     }
 }
