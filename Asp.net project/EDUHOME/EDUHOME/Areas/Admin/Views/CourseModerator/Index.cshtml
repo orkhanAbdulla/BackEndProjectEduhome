@@ -1,0 +1,114 @@
+﻿@model List<Course>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="row">
+    <div class="col-lg-12 grid-margin stretch-card ">
+        <div class="card ">
+            <div class="card-body ">
+                <h4 class="card-title">Courses</h4>
+                <a asp-controller="CourseAdmin" asp-action="Create" class="btn btn-success">Create</a>
+                <div class="table-responsive">
+                    <table class="table table-striped ">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Image
+                                </th>
+                                <th>
+                                    Course
+                                </th>
+                                <th>
+                                    Starts
+                                </th>
+                                <th>
+                                    Language
+                                </th>
+                                <th>
+                                    Students
+                                </th>
+                                <th>
+                                    Price($)
+                                </th>
+                                <th>
+                                    IsDeleted
+                                </th>
+                                <th>
+                                    Setting
+                                </th>
+                            </tr>
+
+                        </thead>
+                        <tbody>
+                            @foreach (Course cr in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        <img style="width: 120px; height: 115px; object-fit:cover" src="~/img/course/@cr.ImageUrl" a />
+                                    </td>
+                                    <td>
+                                        @cr.Name
+                                    </td>
+                                    <td>
+                                        @cr.DetailCourse.Starts
+                                    </td>
+                                    <td>
+                                        @cr.DetailCourse.Language
+                                    </td>
+                                    <td>
+                                        @cr.DetailCourse.Students
+                                    </td>
+                                    <td>
+                                        @cr.DetailCourse.Price
+                                    </td>
+                                    @if (cr.IsDeleted)
+                                    {
+                                        <td class="text-danger">
+                                            Deactive
+                                        </td>
+
+                                    }
+                                    else
+                                    {
+                                        <td class="text-success">
+                                            Active
+                                        </td>
+                                    }
+                                    <td>
+                                        @*<a class="btn btn-info" asp-action="Detail" asp-route-id="@cr.Id">
+                                            Detail
+                                        </a>*@
+
+                                        <a class="btn btn-warning" asp-action="Update" asp-route-id="@cr.Id">
+                                            Edit
+                                        </a>
+
+                                        @*@if (cr.IsDeleted)
+                                        {
+                                            <a class="btn btn-success" asp-controller="CourseAdmin" asp-action="Delete" asp-route-id="@cr.Id">
+                                                Activated
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <a class="btn btn-danger" asp-controller="CourseAdmin" asp-action="Delete" asp-route-id="@cr.Id">
+                                                Deactivated
+                                            </a>
+                                        }*@
+
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+

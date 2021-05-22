@@ -20,5 +20,7 @@ namespace EDUHOME.Models
         [Required]
         public string Description { get; set; }
         public DetailCourse DetailCourse { get; set; }
+        public string AppUserId { get; set; }
+        public AppUser AppUser { get; set; }
     }
 }

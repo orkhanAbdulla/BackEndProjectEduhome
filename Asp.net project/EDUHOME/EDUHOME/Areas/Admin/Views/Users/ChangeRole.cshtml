@@ -1,0 +1,53 @@
+﻿@using Microsoft.AspNetCore.Identity
+@model List<IdentityRole>
+
+@{
+    ViewData["Title"] = "ChangeRole";
+
+}
+<h2>ChangeRole</h2>
+<form class="forms-sample" method="post">
+    <select class="custom-select w-25 my-3 d-block" name="newRole" id="newRole">
+        @foreach (IdentityRole role in Model)
+        {
+            if (role.Name == ViewBag.MyRole)
+            {
+                <option selected value="@role.Name">@role.Name</option>
+            }
+            else
+            {
+                <option value="@role.Name">@role.Name</option>
+            }
+
+        }
+
+
+    </select>
+    <select disabled class="custom-select w-25 my-3" name="courseId" multiple id="courseId">
+        
+        @foreach (Course course in ViewBag.Courses)
+        {
+            <option value="@course.Id">@course.Name</option>
+        }
+
+    </select>
+
+    <div class="my-3">
+        <button type="submit" class="btn btn-primary mr-2">Submit</button>
+        <a class="btn btn-light" asp-action="Index">GO Back</a>
+    </div>
+</form>
+
+
+@section Script{
+    <script>
+        $("#newRole").change(function () {
+            if ($(this).val() == "Moderator") {
+                $("#courseId").removeAttr("disabled")
+            }
+            else {
+                $("#courseId").attr("disabled",true)
+            }
+        })
+    </script>
+}

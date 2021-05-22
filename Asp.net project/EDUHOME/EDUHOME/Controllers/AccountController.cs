@@ -1,6 +1,7 @@
 ﻿using EDUHOME.Helpers;
 using EDUHOME.Models;
 using EDUHOME.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -30,33 +31,30 @@ namespace EDUHOME.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginVM loginVM)
         {
-            if (!ModelState.IsValid) return View();
-            AppUser user = await _userManager.FindByNameAsync(loginVM.UserName);
-            if (user == null)
+            if (ModelState.IsValid)
             {
-                ModelState.AddModelError("", "Username or Password is wrong");
-                return View();
+                AppUser user = await _userManager.FindByNameAsync(loginVM.UserName);
+                if (user != null)
+                {
+                    if (!await _userManager.IsEmailConfirmedAsync(user))
+                    {
+                        ModelState.AddModelError(string.Empty, "Вы не подтвердили свой email");
+                        return View(loginVM);
+                    }
+                }
+                var signInResult = await _signInManager.PasswordSignInAsync(user, loginVM.Password, loginVM.RememberMe, true);
+                if (signInResult.Succeeded)
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Неправильный логин и (или) пароль");
+                }
+
             }
-            if (user.IsDeleted)
-            {
-                ModelState.AddModelError("", "User is deactivated");
-                return View();
-            }
-            var signInResult=await _signInManager.PasswordSignInAsync(user, loginVM.Password,loginVM.RememberMe,true);
-            if (signInResult.IsLockedOut)
-            {
-                ModelState.AddModelError("", "Please try few minutes later");
-            }
-            if (!signInResult.Succeeded)
-            {
-                ModelState.AddModelError("", "Username or Password is wrong");
-                return View();
-            }
-            if ((await _userManager.GetRolesAsync(user))[0]==Roles.Admin.ToString())
-            {
-                return RedirectToAction("Index", "Dashboard",new { area="Admin" });
-            }
-            return RedirectToAction("Index", "Home");
+            
+            return View(loginVM);
         }
         public IActionResult Register()
         {
@@ -68,29 +66,64 @@ namespace EDUHOME.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register( RegisterVM registerVM)
         {
-            if (!ModelState.IsValid) return View();
 
-            AppUser newuser = new AppUser
+            if (ModelState.IsValid)
             {
-                Name=registerVM.Name,
-                Surname=registerVM.Surname,
-                UserName=registerVM.UserName,
-                Email=registerVM.Email
-            };
-            IdentityResult identityResult=await _userManager.CreateAsync(newuser, registerVM.Password);
-            if (!identityResult.Succeeded)
-            {
-                foreach (IdentityError error in identityResult.Errors)
+                AppUser newuser = new AppUser
                 {
-                    ModelState.AddModelError("", error.Description);
-                }
-                return View();
-            }
-            await _userManager.AddToRoleAsync(newuser,Roles.Member.ToString());
-            await _signInManager.SignInAsync(newuser, true);
-            return RedirectToAction("Index", "Home");
+                    Name = registerVM.Name,
+                    Surname = registerVM.Surname,
+                    UserName = registerVM.UserName,
+                    Email = registerVM.Email,
+                     
+                };
 
-           
+                IdentityResult identityResult = await _userManager.CreateAsync(newuser, registerVM.Password);
+                await _userManager.AddToRoleAsync(newuser, Roles.Member.ToString());
+
+                if (identityResult.Succeeded)
+                {
+                    // генерация токена для пользователя
+                    var code = await _userManager.GenerateEmailConfirmationTokenAsync(newuser);
+                    var callbackUrl = Url.Action(
+                        "ConfirmEmail",
+                        "Account",
+                        new { userId = newuser.Id, code = code },
+                        protocol: HttpContext.Request.Scheme);
+                    EmailService emailService = new EmailService();
+                    await emailService.SendEmailAsync(registerVM.Email, "Confirm your account",
+                        $"Подтвердите регистрацию, перейдя по ссылке: <a href='{callbackUrl}'>link</a>");
+
+                    return Content("Для завершения регистрации проверьте электронную почту и перейдите по ссылке, указанной в письме");
+                }
+            }
+            //else
+            //{
+            //    foreach (IdentityError error in identityResult.Errors)
+            //    {
+            //        ModelState.AddModelError("", error.Description);
+            //    }
+            //}
+            return View(registerVM);
+        }
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> ConfirmEmail(string userId, string code)
+        {
+            if (userId == null || code == null)
+            {
+                return View("Error");
+            }
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user == null)
+            {
+                return View("Error");
+            }
+            var result = await _userManager.ConfirmEmailAsync(user, code);
+            if (result.Succeeded)
+                return RedirectToAction("Index", "Home");
+            else
+                return View("Error");
         }
         public async Task<IActionResult> Logout()
         {

@@ -26,6 +26,7 @@ namespace EDUHOME
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+
             services.AddControllersWithViews();
             services.AddIdentity<AppUser, IdentityRole>(identityOptions =>
             {
@@ -56,6 +57,8 @@ namespace EDUHOME
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseDeveloperExceptionPage();
+            app.UseHttpsRedirection();
             app.UseRouting();
             app.UseStaticFiles();
             app.UseAuthentication();

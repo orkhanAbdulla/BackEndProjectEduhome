@@ -166,106 +166,165 @@
             </div>
         </nav>
         <!-- partial -->
-        <div class="container-fluid page-body-wrapper">
-            <!-- partial:partials/_sidebar.html -->
-            <nav class="sidebar sidebar-offcanvas" id="sidebar">
-                <ul class="nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.html">
-                            <i class="mdi mdi-home menu-icon"></i>
-                            <span class="menu-title">Dashboard</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="collapse" href="#ui-basic1" aria-expanded="false" aria-controls="ui-basic1">
-                            <i class="mdi mdi-circle-outline menu-icon"></i>
-                            <span class="menu-title">Course</span>
-                            <i class="menu-arrow"></i>
-                        </a>
-                        <div class="collapse" id="ui-basic1">
-                            <ul class="nav flex-column sub-menu">
-                                <li class="nav-item"> <a class="nav-link" asp-controller="CourseAdmin" asp-action="Index">Courses List</a></li>
-                                <li class="nav-item"> <a class="nav-link" asp-controller="CourseAdmin" asp-action="Create">Craete Course</a></li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="collapse" href="#ui-basic2" aria-expanded="false" aria-controls="ui-basic2">
-                            <i class="mdi mdi-circle-outline menu-icon"></i>
-                            <span class="menu-title">Event</span>
-                            <i class="menu-arrow"></i>
-                        </a>
-                        <div class="collapse" id="ui-basic2">
-                            <ul class="nav flex-column sub-menu">
-                                <li class="nav-item"> <a class="nav-link" asp-controller="EventAdmin" asp-action="Index">Event List</a></li>
-                                <li class="nav-item"> <a class="nav-link" asp-controller="EventAdmin" asp-action="Create">Create Event</a></li>
+        @if (User.IsInRole("Admin"))
+        {
+            <div class="container-fluid page-body-wrapper">
+                <!-- partial:partials/_sidebar.html -->
+                <nav class="sidebar sidebar-offcanvas" id="sidebar">
+                    <ul class="nav">
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Dashboard" asp-action="Index">
+                                <i class="mdi mdi-home menu-icon"></i>
+                                <span class="menu-title">Dashboard</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="collapse" href="#ui-basic1" aria-expanded="false" aria-controls="ui-basic1">
+                                <i class="mdi mdi-circle-outline menu-icon"></i>
+                                <span class="menu-title">Course</span>
+                                <i class="menu-arrow"></i>
+                            </a>
+                            <div class="collapse" id="ui-basic1">
+                                <ul class="nav flex-column sub-menu">
+                                    <li class="nav-item"> <a class="nav-link" asp-controller="CourseAdmin" asp-action="Index">Courses List</a></li>
+                                    <li class="nav-item"> <a class="nav-link" asp-controller="CourseAdmin" asp-action="Create">Craete Course</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="collapse" href="#ui-basic2" aria-expanded="false" aria-controls="ui-basic2">
+                                <i class="mdi mdi-circle-outline menu-icon"></i>
+                                <span class="menu-title">Event</span>
+                                <i class="menu-arrow"></i>
+                            </a>
+                            <div class="collapse" id="ui-basic2">
+                                <ul class="nav flex-column sub-menu">
+                                    <li class="nav-item"> <a class="nav-link" asp-controller="EventAdmin" asp-action="Index">Event List</a></li>
+                                    <li class="nav-item"> <a class="nav-link" asp-controller="EventAdmin" asp-action="Create">Create Event</a></li>
 
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="collapse" href="#ui-basic3" aria-expanded="false" aria-controls="ui-basic3">
-                            <i class="mdi mdi-circle-outline menu-icon"></i>
-                            <span class="menu-title">Teacher</span>
-                            <i class="menu-arrow"></i>
-                        </a>
-                        <div class="collapse" id="ui-basic3">
-                            <ul class="nav flex-column sub-menu">
-                                <li class="nav-item"> <a class="nav-link" asp-controller="TeacherAdmin" asp-action="Index">Teacher List</a></li>
-                                <li class="nav-item"> <a class="nav-link" asp-controller="TeacherAdmin" asp-action="Create">Create Teacher</a></li>
-                                <li class="nav-item"> <a class="nav-link" asp-controller="SocialMedia" asp-action="Index">SocialMedia</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="collapse" href="#ui-basic3" aria-expanded="false" aria-controls="ui-basic3">
+                                <i class="mdi mdi-circle-outline menu-icon"></i>
+                                <span class="menu-title">Teacher</span>
+                                <i class="menu-arrow"></i>
+                            </a>
+                            <div class="collapse" id="ui-basic3">
+                                <ul class="nav flex-column sub-menu">
+                                    <li class="nav-item"> <a class="nav-link" asp-controller="TeacherAdmin" asp-action="Index">Teacher List</a></li>
+                                    <li class="nav-item"> <a class="nav-link" asp-controller="TeacherAdmin" asp-action="Create">Create Teacher</a></li>
+                                    <li class="nav-item"> <a class="nav-link" asp-controller="SocialMedia" asp-action="Index">SocialMedia</a></li>
 
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="collapse" href="#ui-basic5" aria-expanded="false" aria-controls="ui-basic5">
-                            <i class="mdi mdi-circle-outline menu-icon"></i>
-                            <span class="menu-title">Blog</span>
-                            <i class="menu-arrow"></i>
-                        </a>
-                        <div class="collapse" id="ui-basic5">
-                            <ul class="nav flex-column sub-menu">
-                                <li class="nav-item"> <a class="nav-link" asp-controller="BlogAdmin" asp-action="Index">Blog List</a></li>
-                                <li class="nav-item"> <a class="nav-link" asp-controller="BlogAdmin" asp-action="Create">Create Blog</a></li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
-                            <i class="mdi mdi-account menu-icon"></i>
-                            <span class="menu-title">User Pages</span>
-                            <i class="menu-arrow"></i>
-                        </a>
-                        <div class="collapse" id="auth">
-                            <ul class="nav flex-column sub-menu">
-                                <li class="nav-item"> <a class="nav-link" href="pages/samples/login.html"> Login </a></li>
-                                <li class="nav-item"> <a class="nav-link" href="pages/samples/login-2.html"> Login 2 </a></li>
-                                <li class="nav-item"> <a class="nav-link" href="pages/samples/register.html"> Register </a></li>
-                                <li class="nav-item"> <a class="nav-link" href="pages/samples/register-2.html"> Register 2 </a></li>
-                                <li class="nav-item"> <a class="nav-link" href="pages/samples/lock-screen.html"> Lockscreen </a></li>
-                            </ul>
-                        </div>
-                    </li>
-                </ul>
-            </nav>
-            <!-- partial -->
-            <div class="main-panel">
-                <div class="content-wrapper">
-                    @RenderBody()
-                </div>
-                <!-- content-wrapper ends -->
-                <!-- partial:partials/_footer.html -->
-                <footer class="footer">
-                    <div class="d-sm-flex justify-content-center justify-content-sm-between">
-                        <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2018 <a href="https://www.bootstrapdash.com/" target="_blank">Bootstrapdash</a>. All rights reserved.</span>
-                        <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted & made with <i class="mdi mdi-heart text-danger"></i></span>
-                    </div>
-                </footer>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="collapse" href="#ui-basic5" aria-expanded="false" aria-controls="ui-basic5">
+                                <i class="mdi mdi-circle-outline menu-icon"></i>
+                                <span class="menu-title">Blog</span>
+                                <i class="menu-arrow"></i>
+                            </a>
+                            <div class="collapse" id="ui-basic5">
+                                <ul class="nav flex-column sub-menu">
+                                    <li class="nav-item"> <a class="nav-link" asp-controller="BlogAdmin" asp-action="Index">Blog List</a></li>
+                                    <li class="nav-item"> <a class="nav-link" asp-controller="BlogAdmin" asp-action="Create">Create Blog</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
+                                <i class="mdi mdi-account menu-icon"></i>
+                                <span class="menu-title">User Pages</span>
+                                <i class="menu-arrow"></i>
+                            </a>
+                            <div class="collapse" id="auth">
+                                <ul class="nav flex-column sub-menu">
+                                    <li class="nav-item"> <a class="nav-link" asp-controller="Users" asp-action="Index"> Users </a></li>
+                                    <li class="nav-item"> <a class="nav-link" asp-area="" asp-controller="Account" asp-action="Login"> Login </a></li>
+                                    <li class="nav-item"> <a class="nav-link" asp-area="" asp-controller="Account" asp-action="Register"> Register </a></li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </nav>
                 <!-- partial -->
+                <div class="main-panel">
+                    <div class="content-wrapper">
+                        @RenderBody()
+                    </div>
+                    <!-- content-wrapper ends -->
+                    <!-- partial:partials/_footer.html -->
+                    <footer class="footer">
+                        <div class="d-sm-flex justify-content-center justify-content-sm-between">
+                            <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2018 <a href="https://www.bootstrapdash.com/" target="_blank">Bootstrapdash</a>. All rights reserved.</span>
+                            <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted & made with <i class="mdi mdi-heart text-danger"></i></span>
+                        </div>
+                    </footer>
+                    <!-- partial -->
+                </div>
+                <!-- main-panel ends -->
             </div>
-            <!-- main-panel ends -->
-        </div>
+        }
+        else if (User.IsInRole("Moderator"))
+        {
+            <div class="container-fluid page-body-wrapper">
+                <!-- partial:partials/_sidebar.html -->
+                <nav class="sidebar sidebar-offcanvas" id="sidebar">
+                    <ul class="nav">
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Dashboard" asp-action="Index">
+                                <i class="mdi mdi-home menu-icon"></i>
+                                <span class="menu-title">Dashboard</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="collapse" href="#ui-basic1" aria-expanded="false" aria-controls="ui-basic1">
+                                <i class="mdi mdi-circle-outline menu-icon"></i>
+                                <span class="menu-title">Course</span>
+                                <i class="menu-arrow"></i>
+                            </a>
+                            <div class="collapse" id="ui-basic1">
+                                <ul class="nav flex-column sub-menu">
+                                    <li class="nav-item"> <a class="nav-link" asp-controller="CourseModerator" asp-action="Index">Courses List</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
+                                <i class="mdi mdi-account menu-icon"></i>
+                                <span class="menu-title">User Pages</span>
+                                <i class="menu-arrow"></i>
+                            </a>
+                            <div class="collapse" id="auth">
+                                <ul class="nav flex-column sub-menu">
+                                    <li class="nav-item"> <a class="nav-link" asp-area="" asp-controller="Account" asp-action="Login"> Login </a></li>
+                                    <li class="nav-item"> <a class="nav-link" asp-area="" asp-controller="Account" asp-action="Register"> Register </a></li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </nav>
+                <!-- partial -->
+                <div class="main-panel">
+                    <div class="content-wrapper">
+                        @RenderBody()
+                    </div>
+                    <!-- content-wrapper ends -->
+                    <!-- partial:partials/_footer.html -->
+                    <footer class="footer">
+                        <div class="d-sm-flex justify-content-center justify-content-sm-between">
+                            <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2018 <a href="https://www.bootstrapdash.com/" target="_blank">Bootstrapdash</a>. All rights reserved.</span>
+                            <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted & made with <i class="mdi mdi-heart text-danger"></i></span>
+                        </div>
+                    </footer>
+                    <!-- partial -->
+                </div>
+                <!-- main-panel ends -->
+            </div>
+        }
+
         <!-- page-body-wrapper ends -->
     </div>
     <!-- container-scroller -->

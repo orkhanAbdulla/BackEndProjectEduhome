@@ -354,3 +354,10 @@ C:\Users\hp\Desktop\Edu\BackEndProjectEduhome\Asp.net project\EDUHOME\EDUHOME\bi
 C:\Users\hp\Desktop\Edu\BackEndProjectEduhome\Asp.net project\EDUHOME\EDUHOME\obj\Debug\netcoreapp3.1\Razor\Views\Account\Register.cshtml.g.cs
 C:\Users\hp\Desktop\Edu\BackEndProjectEduhome\Asp.net project\EDUHOME\EDUHOME\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_ValidationPartial.cshtml.g.cs
 C:\Users\hp\Desktop\Edu\BackEndProjectEduhome\Asp.net project\EDUHOME\EDUHOME\obj\Debug\netcoreapp3.1\Razor\Views\Account\Login.cshtml.g.cs
+C:\Users\hp\Desktop\Edu\BackEndProjectEduhome\Asp.net project\EDUHOME\EDUHOME\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Users\Index.cshtml.g.cs
+C:\Users\hp\Desktop\Edu\BackEndProjectEduhome\Asp.net project\EDUHOME\EDUHOME\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Users\ChangeRole.cshtml.g.cs
+C:\Users\hp\Desktop\Edu\BackEndProjectEduhome\Asp.net project\EDUHOME\EDUHOME\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\CourseModerator\Index.cshtml.g.cs
+C:\Users\hp\Desktop\Edu\BackEndProjectEduhome\Asp.net project\EDUHOME\EDUHOME\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\CourseModerator\Update.cshtml.g.cs
+C:\Users\hp\Desktop\Edu\BackEndProjectEduhome\Asp.net project\EDUHOME\EDUHOME\bin\Debug\netcoreapp3.1\MailKit.dll
+C:\Users\hp\Desktop\Edu\BackEndProjectEduhome\Asp.net project\EDUHOME\EDUHOME\bin\Debug\netcoreapp3.1\MimeKit.dll
+C:\Users\hp\Desktop\Edu\BackEndProjectEduhome\Asp.net project\EDUHOME\EDUHOME\bin\Debug\netcoreapp3.1\BouncyCastle.Crypto.dll
