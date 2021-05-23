@@ -2,52 +2,133 @@
 @{
     ViewData["Title"] = "Detail";
 }
+<div class="row">
+    <div class="col-lg-12 grid-margin stretch-card">
+        <div class="card ">
+            <div class="card-body">
+                <a asp-controller="CourseAdmin" asp-action="Index" class="btn btn-secondary">Go Back</a>
+                <div class="table-responsive">
+                    <table class="table table-striped ">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Image
+                                </th>
+                                <th>
+                                    Course
+                                </th>
+                                <th>
+                                    Description
+                                </th>
+                                <th>
+                                   Course Features
+                                </th>
+                                <th>
+                                    Settings
+                                </th>
 
-<table class="table table-striped">
-    <thead>
-        <tr>
-            
-            <th scope="col">Image</th>
-            <th scope="col">Description</th>
-            <th scope="col">Information</th>
-            <th scope="col">Course Features</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            
-            <td><img style="width: 200px; height: 200px; object-fit:cover" src="~/img/course/@Model.ImageUrl" /></td>
-            <td>
-                <!-- Button trigger modal -->
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-                    Launch demo modal
-                </button>
+                            </tr>
 
-                <!-- Modal -->
-                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                @Model.Description
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary">Save changes</button>
-                            </div>
-                        </div>
-                    </div>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <img style="width: 150px; height: 150px; object-fit:cover" src="~/img/course/@Model.ImageUrl" a />
+                                </td>
+                                <td>
+                                    <h5>@Model.Name</h5>
+                                </td>
+                                <td>
+                                    <!-- Button trigger modal -->
+                                    <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModalLong-@Model.Id">
+                                        Click for Description
+                                    </button>
+
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="exampleModalLong-@Model.Id" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle-@Model.Id" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <h3>Description</h3>
+                                                    <p>@Model.Description</p>
+                                                    <div class="course-details-left">
+                                                        <div class="single-course-left">
+                                                            <h3>about course</h3>
+                                                            <p>@Model.DetailCourse.AboutCourse</p>
+                                                        </div>
+                                                        <div class="single-course-left">
+                                                            <h3>how to apply</h3>
+                                                            <p>@Model.DetailCourse.HowToApply</p>
+                                                        </div>
+                                                        <div class="single-course-left">
+                                                            <h3>certification</h3>
+                                                            @Html.Raw(Model.DetailCourse.Certification)
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <!-- Button trigger modal -->
+                                    <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModalLong-1">
+                                        Course Features
+                                    </button>
+
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="exampleModalLong-1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle3-1" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="course-details-right">
+                                                        <h3>COURSE FEATURES</h3>
+                                                        <ul>
+                                                            <li>starts: <span>@Model.DetailCourse.Starts</span></li>
+                                                            <li>duration: <span>@Model.DetailCourse.Duration</span></li>
+                                                            <li>class duration: <span>@Model.DetailCourse.ClassDuration</span></li>
+                                                            <li>skill level: <span>@Model.DetailCourse.SkillLevel</span></li>
+                                                            <li>language: <span>@Model.DetailCourse.Language</span></li>
+                                                            <li>students: <span>@Model.DetailCourse.Students</span></li>
+                                                            <li>assesments: <span>@Model.DetailCourse.Assesments</span></li>
+                                                        </ul>
+                                                        <h3 class="red">course fee $@Model.DetailCourse.Price</h3>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <a class="btn btn-warning" asp-action="Update" asp-route-id="@Model.Id">
+                                        Edit
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
-            </td>
-        </tr>
-        <tr>
-
-        </tr>
-    </tbody>
-</table>
-
+            </div>
+        </div>
+    </div>
+</div>

@@ -3,7 +3,6 @@
 
 @{
     ViewData["Title"] = "ChangeRole";
-
 }
 <h2>ChangeRole</h2>
 <form class="forms-sample" method="post">
@@ -23,14 +22,28 @@
 
 
     </select>
-    <select disabled class="custom-select w-25 my-3" name="courseId" multiple id="courseId">
-        
-        @foreach (Course course in ViewBag.Courses)
-        {
-            <option value="@course.Id">@course.Name</option>
-        }
+    @if (ViewBag.MyRole == "Moderator")
+    {
+        <select  class="custom-select w-25 my-3" name="courseId" multiple id="courseId">
 
-    </select>
+            @foreach (Course course in ViewBag.Courses)
+            {
+                <option value="@course.Id">@course.Name</option>
+            }
+
+        </select>
+    }
+    else
+    {
+        <select disabled class="custom-select w-25 my-3" name="courseId" multiple id="courseId">
+
+            @foreach (Course course in ViewBag.Courses)
+            {
+                <option value="@course.Id">@course.Name</option>
+            }
+
+        </select>
+    }
 
     <div class="my-3">
         <button type="submit" class="btn btn-primary mr-2">Submit</button>

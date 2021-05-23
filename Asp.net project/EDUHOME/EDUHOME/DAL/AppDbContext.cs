@@ -25,6 +25,7 @@ namespace EDUHOME.DAL
         public DbSet<Social> Socials { get; set; }
         public DbSet<Blog> Blogs { get; set; }
         public DbSet<BlogDetail> BlogDetail { get; set; }
+        public DbSet<Subsciber> Subscibers  { get; set; }
 
 
 

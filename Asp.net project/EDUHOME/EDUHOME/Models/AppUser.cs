@@ -14,6 +14,8 @@ namespace EDUHOME.Models
         [Required]
         public string Surname { get; set; }
         public bool IsDeleted { get; set; }
+        public bool IsSubscribed { get; set; }
         public List<Course> courses { get; set; }
+
     }
 }

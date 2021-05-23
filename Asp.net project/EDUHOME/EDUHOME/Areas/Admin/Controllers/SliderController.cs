@@ -80,5 +80,12 @@ namespace EDUHOME.Areas.Admin.Controllers
             return RedirectToAction(nameof(Index));
             
         }
+        public IActionResult Update(int? id)
+        {
+            if (id == null) return NotFound();
+            Slider slider = _context.Sliders.FirstOrDefault(s => s.Id == id);
+            if (slider == null) return NotFound();
+            return View(slider);
+        }
     }
 }

@@ -62,7 +62,7 @@ namespace EDUHOME.Areas.Admin.Controllers
                 ModelState.AddModelError("Event.Photo", "Please select image Type");
                 return View();
             }
-            if (!eventVM.Event.Photo.IsValidSize(300))
+            if (!eventVM.Event.Photo.IsValidSize(200))
             {
                 ModelState.AddModelError("Event.Photo", "Please select image Size less than kb");
                 return View();
@@ -84,16 +84,18 @@ namespace EDUHOME.Areas.Admin.Controllers
 
 
 
-            List<EventSpeaker> eventSpeakers = new List<EventSpeaker>();
-            EventSpeaker eventSpeaker = new EventSpeaker();
-            eventSpeaker.EventId = eventVM.Event.Id;
+            
+
             foreach (int sp in eventVM.Speakers)
             {
+                EventSpeaker eventSpeaker = new EventSpeaker();
+                eventSpeaker.EventId = eventVM.Event.Id;
                 eventSpeaker.SpeakerId = sp;
-                eventSpeakers.Add(eventSpeaker);
+                await _context.AddAsync(eventSpeaker);
+                await _context.SaveChangesAsync();
             }
 
-            eventVM.Event.EventSpeakers = eventSpeakers;
+            
 
             _context.Update(eventVM.Event);
 
@@ -164,18 +166,21 @@ namespace EDUHOME.Areas.Admin.Controllers
             {
                 _context.EventSpeakers.Remove(s);
             }
-            List<EventSpeaker> eventSpeakers = new List<EventSpeaker>();
-            EventSpeaker eventSpeaker = new EventSpeaker();
-            eventSpeaker.EventId = DbEvent.Id;
+           
+            
             foreach (int sp in eventVM.Speakers)
             {
+                EventSpeaker eventSpeaker = new EventSpeaker();
+                eventSpeaker.EventId = DbEvent.Id;
                 eventSpeaker.SpeakerId = sp;
-                eventSpeakers.Add(eventSpeaker);
+                await _context.AddAsync(eventSpeaker);
+                //eventSpeakers.Add(eventSpeaker);
+                await _context.SaveChangesAsync();
             }
-            
+
             DbEvent = eventVM.Event;
             DbEvent.EventDetail = eventVM.EventDetail;
-            DbEvent.EventSpeakers= eventSpeakers;
+            
 
             _context.Update(DbEvent);
             await _context.SaveChangesAsync();

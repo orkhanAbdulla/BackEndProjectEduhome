@@ -9,5 +9,6 @@ namespace EDUHOME.ViewModels
     public class HomeVM
     {
         public List<Slider> Sliders;
+        public Subsciber Subsciber;
     }
 }

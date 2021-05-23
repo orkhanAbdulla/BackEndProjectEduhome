@@ -71,8 +71,14 @@ namespace EDUHOME.Areas.Admin.Controllers
             course.ImageUrl = await course.Photo.SavaFileAsync(_env.WebRootPath, path);
             course.DetailCourse.Course= course;
             course.DetailCourse.CourseId = course.Id;
-
-            await _context.AddRangeAsync(course,course.DetailCourse);
+            await _context.AddRangeAsync(course, course.DetailCourse);
+            await _context.SaveChangesAsync();
+            string Massage = "https://localhost:44398/Courses/Detail/" + course.Id.ToString();
+            List<Subsciber> subscibers = _context.Subscibers.ToList();
+            foreach (Subsciber sub in subscibers)
+            {
+               await Helper.SendMessageAsync("New Course", Massage, sub.Email);
+            }
             await _context.SaveChangesAsync();
 
             return RedirectToAction(nameof(Index));
