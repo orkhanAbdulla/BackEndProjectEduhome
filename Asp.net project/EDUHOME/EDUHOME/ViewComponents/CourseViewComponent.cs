@@ -17,7 +17,7 @@ namespace EDUHOME.ViewComponents
         }
         public async Task<IViewComponentResult> InvokeAsync(int take)
         {
-            List<Course> model = _context.Courses.OrderByDescending(c=>c.Id).Take(take).ToList();
+            List<Course> model = _context.Courses.Where(c => c.IsDeleted == false).OrderByDescending(c=>c.Id).Take(take).ToList();
             return View(await Task.FromResult(model));
         }
     }

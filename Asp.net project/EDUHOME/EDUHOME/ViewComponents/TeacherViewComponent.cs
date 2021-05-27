@@ -18,7 +18,7 @@ namespace EDUHOME.ViewComponents
         }
         public async Task<IViewComponentResult> InvokeAsync(int take)
         {
-            List<Teacher> model = _context.Teachers.Include(t=>t.socials).Take(take).ToList();
+            List<Teacher> model = _context.Teachers.Where(c => c.IsDeleted == false).Include(t=>t.socials).Take(take).ToList();
             return View(await Task.FromResult(model));
         }
     }

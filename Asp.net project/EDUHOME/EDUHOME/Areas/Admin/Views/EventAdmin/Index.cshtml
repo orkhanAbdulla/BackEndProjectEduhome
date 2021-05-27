@@ -93,9 +93,9 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    
+
                                     </td>
-                                    
+
                                     @if (ev.IsDeleted)
                                     {
                                         <td class="text-danger">
@@ -119,13 +119,13 @@
                                         </a>
                                         @if (ev.IsDeleted)
                                         {
-                                            <a class="btn btn-success" asp-action="Activity" asp-route-id="@ev.Id">
+                                            <a class="btn btn-success" asp-action="Delete" asp-route-id="@ev.Id">
                                                 Activated
                                             </a>
                                         }
                                         else
                                         {
-                                            <a class="btn btn-danger" asp-action="Activity" asp-route-id="@ev.Id">
+                                            <a class="btn btn-danger" asp-action="Delete" asp-route-id="@ev.Id">
                                                 Deactivated
                                             </a>
                                         }
@@ -141,7 +141,11 @@
     </div>
 </div>
 
+@section Script{
+   
+    <partial name="_ValidationPartial" />
 
+}
 
 
 

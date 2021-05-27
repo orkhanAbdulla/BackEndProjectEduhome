@@ -30,7 +30,7 @@ namespace EDUHOME.Controllers
         }
         public IActionResult Search(string search)
         {
-            List<Course> courses = _context.Courses.Where(x=>x.Name.ToLower().Trim().Contains(search.ToLower().Trim())).ToList();
+            List<Course> courses = _context.Courses.Where(x=>x.IsDeleted==false&&x.Name.ToLower().Trim().Contains(search.ToLower().Trim())).ToList();
             return PartialView("_CoursePartial",courses);
         }
     }

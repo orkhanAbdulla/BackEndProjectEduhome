@@ -11,7 +11,7 @@ namespace EDUHOME.Models
     public class Course
     {
         public int Id { get; set; }
-        [NotMapped,Required]
+        [NotMapped]
         public IFormFile Photo { get; set; }
         public string ImageUrl { get; set; }
         public bool IsDeleted { get; set; }

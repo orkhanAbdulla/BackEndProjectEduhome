@@ -147,13 +147,13 @@
                                         </a>
                                         @if (t.IsDeleted)
                                         {
-                                            <a class="btn btn-success" asp-action="Activity" asp-route-id="@t.Id">
+                                            <a class="btn btn-success" asp-action="Delete" asp-route-id="@t.Id">
                                                 Activated
                                             </a>
                                         }
                                         else
                                         {
-                                            <a class="btn btn-danger" asp-action="Activity" asp-route-id="@t.Id">
+                                            <a class="btn btn-danger" asp-action="Delete" asp-route-id="@t.Id">
                                                 Deactivated
                                             </a>
                                         }

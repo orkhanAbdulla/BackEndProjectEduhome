@@ -27,5 +27,10 @@ namespace EDUHOME.Controllers
             if (Eve == null) return NotFound();
             return View(Eve);
         }
+        public IActionResult Search(string searchh)
+        {
+            List<Event> events = _context.Events.Where(x => x.IsDeleted == false && x.Lesson.ToLower().Trim().Contains(searchh.ToLower().Trim())).ToList();
+            return PartialView("_EventPartial", events);
+        }
     }
 }

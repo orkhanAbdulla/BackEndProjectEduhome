@@ -30,7 +30,7 @@ namespace EDUHOME.Areas.Admin.Controllers
         {
             //Where(x => x.AppUserId ==)
             ////ViewBag.IsDeleted = IsDeleted;
-            List<Course> courses = _context.Courses.Include(c => c.DetailCourse).ToList();
+            List<Course> courses = _context.Courses.OrderByDescending(x => x.Id).Include(c => c.DetailCourse).ToList();
             return View(courses);
         }
         public IActionResult Detail(int? id)
@@ -57,16 +57,25 @@ namespace EDUHOME.Areas.Admin.Controllers
             //    ModelState.AddModelError("Name", "Bu adda kategoriya movcuddur");
             //    return View();
             //}
-            if (!course.Photo.IsValidType("image/"))
+            if (course.Photo==null)
             {
-                ModelState.AddModelError("Photo", "Please select image Type");
+                ModelState.AddModelError("Photo", "Please select image");
                 return View();
             }
-            if (!course.Photo.IsValidSize(300))
+            else
             {
-                ModelState.AddModelError("Photo", "Please select image Size less than kb");
-                return View();
+                if (!course.Photo.IsValidType("image/"))
+                {
+                    ModelState.AddModelError("Photo", "Please select image Type");
+                    return View();
+                }
+                if (!course.Photo.IsValidSize(300))
+                {
+                    ModelState.AddModelError("Photo", "Please select image Size less than kb");
+                    return View();
+                }
             }
+           
             string path = Path.Combine("img", "course");
             course.ImageUrl = await course.Photo.SavaFileAsync(_env.WebRootPath, path);
             course.DetailCourse.Course= course;
@@ -119,20 +128,23 @@ namespace EDUHOME.Areas.Admin.Controllers
           
 
             if (!ModelState.IsValid) return View(CourseServer);
-            if (!course.Photo.IsValidType("image/"))
+            if (course.Photo!=null)
             {
-                ModelState.AddModelError("Photo", "Please select image Type");
-                return View(CourseServer);
+                if (!course.Photo.IsValidType("image/"))
+                {
+                    ModelState.AddModelError("Photo", "Please select image Type");
+                    return View(CourseServer);
+                }
+                if (!course.Photo.IsValidSize(300))
+                {
+                    ModelState.AddModelError("Photo", "Please select image Size less than kb");
+                    return View(CourseServer);
+                }
+                string path = Path.Combine("img", "course");
+                Helper.DeleteFile(_env.WebRootPath, path, CourseServer.ImageUrl);
+                path = Path.Combine("img", "course");
+                CourseServer.ImageUrl = await course.Photo.SavaFileAsync(_env.WebRootPath, path);
             }
-            if (!course.Photo.IsValidSize(300))
-            {
-                ModelState.AddModelError("Photo", "Please select image Size less than kb");
-                return View(CourseServer);
-            }
-            string path = Path.Combine("img", "course");
-            Helper.DeleteFile(_env.WebRootPath, path, CourseServer.ImageUrl);
-            path = Path.Combine("img", "course");
-            CourseServer.ImageUrl = await course.Photo.SavaFileAsync(_env.WebRootPath, path);
             CourseServer.Name = course.Name;
             CourseServer.Description = course.Description;
             CourseServer.DetailCourse.AboutCourse = course.DetailCourse.AboutCourse;
@@ -151,5 +163,6 @@ namespace EDUHOME.Areas.Admin.Controllers
 
             return RedirectToAction(nameof(Index));
         }
+     
     }
 }

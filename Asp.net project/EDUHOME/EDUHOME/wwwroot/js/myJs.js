@@ -13,7 +13,7 @@ $(document).on('click', `#button-subscribe`, function () {
         }
     })
 })
-$(document).on('keyup',`#Course-search`, function () {
+$(document).on('keyup', `#Course-search`, function () {
     console.log($(this).val())
     $("#New-Courses").empty()
     if ($(this).val().length > 0) {
@@ -35,6 +35,28 @@ $(document).on('keyup',`#Course-search`, function () {
 
     }
 
+})
+$(document).on('keyup', `#Event-search`, function () {
+    console.log($(this).val())
+    $("#New-Event").empty()
+    if ($(this).val().length > 0) {
+        $.ajax({
+            url: `/Event/Search`,
+            data: {
+                "searchh": $(this).val(),
+            },
+            type: "Get",
+            success: function (res) {
+                console.log("sdsad")
+                $("#Old-Event").css("display", "none")
+                $("#New-Event").append(res)
+            }
+        })
+    }
+    else {
+        $("#Old-Event").css("display", "block")
+
+    }
 
 
 })

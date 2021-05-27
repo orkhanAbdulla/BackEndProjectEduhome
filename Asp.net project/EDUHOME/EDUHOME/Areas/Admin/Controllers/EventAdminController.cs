@@ -1,5 +1,6 @@
 ﻿using EDUHOME.DAL;
 using EDUHOME.Extensions;
+using EDUHOME.Helpers;
 using EDUHOME.Models;
 using EDUHOME.ViewModels;
 using Microsoft.AspNetCore.Authorization;
@@ -27,8 +28,31 @@ namespace EDUHOME.Areas.Admin.Controllers
         }
         public IActionResult Index()
         {
-            List<Event> Event = _context.Events.Include(e => e.EventDetail).Include(e => e.EventSpeakers).ThenInclude(e => e.Speaker).ToList();
+            List<Event> Event = _context.Events.OrderByDescending(x=>x.Id).Include(e => e.EventDetail).Include(e => e.EventSpeakers).ThenInclude(e => e.Speaker).ToList();
             return View(Event);
+        }
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null) return NotFound();
+            Event Eventdb = await _context.Events.FirstOrDefaultAsync(c => c.Id == id);
+            if (Eventdb == null) return NotFound();
+            if (!Eventdb.IsDeleted)
+            {
+                Eventdb.IsDeleted = true;
+
+            }
+            else
+            {
+                Eventdb.IsDeleted = false;
+
+            }
+            EventVM eventVM = new EventVM
+            {
+                Event = Eventdb
+            };
+            _context.UpdateRange(Eventdb);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
         }
         public IActionResult Detail(int? id)
         {
@@ -76,6 +100,12 @@ namespace EDUHOME.Areas.Admin.Controllers
             eventVM.Event.ImageUrl = await eventVM.Event.Photo.SavaFileAsync(_env.WebRootPath, path);
 
             await _context.Events.AddAsync(eventVM.Event);
+            string Massage = "https://localhost:44398/Event/Detail/" + eventVM.Event.Id.ToString();
+            List<Subsciber> subscibers = _context.Subscibers.ToList();
+            foreach (Subsciber sub in subscibers)
+            {
+                await Helper.SendMessageAsync("New Course", Massage, sub.Email);
+            }
             await _context.SaveChangesAsync();
 
 
@@ -166,21 +196,21 @@ namespace EDUHOME.Areas.Admin.Controllers
             {
                 _context.EventSpeakers.Remove(s);
             }
-           
-            
+
+            List <EventSpeaker> eventSpeakers = new List<EventSpeaker>();
             foreach (int sp in eventVM.Speakers)
             {
                 EventSpeaker eventSpeaker = new EventSpeaker();
                 eventSpeaker.EventId = DbEvent.Id;
                 eventSpeaker.SpeakerId = sp;
+                eventSpeakers.Add(eventSpeaker);
                 await _context.AddAsync(eventSpeaker);
-                //eventSpeakers.Add(eventSpeaker);
                 await _context.SaveChangesAsync();
             }
 
             DbEvent = eventVM.Event;
             DbEvent.EventDetail = eventVM.EventDetail;
-            
+            DbEvent.EventSpeakers = eventSpeakers;
 
             _context.Update(DbEvent);
             await _context.SaveChangesAsync();

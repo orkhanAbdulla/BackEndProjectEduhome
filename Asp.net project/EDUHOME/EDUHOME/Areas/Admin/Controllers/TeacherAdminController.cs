@@ -30,6 +30,25 @@ namespace EDUHOME.Areas.Admin.Controllers
             List<Teacher> teachers = _context.Teachers.Include(t => t.TeacherDetail).Include(t => t.socials).ToList();
             return View(teachers);
         }
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null) return NotFound();
+            Teacher teacher = await _context.Teachers.FirstOrDefaultAsync(c => c.Id == id);
+            if (teacher == null) return NotFound();
+            if (!teacher.IsDeleted)
+            {
+                teacher.IsDeleted = true;
+
+            }
+            else
+            {
+                teacher.IsDeleted = false;
+
+            }
+            _context.UpdateRange(teacher);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
         public IActionResult Create()
         {
             return View();
@@ -57,6 +76,12 @@ namespace EDUHOME.Areas.Admin.Controllers
             teacher.TeacherDetail.TeacherId = teacher.Id;
 
             await _context.AddRangeAsync(teacher, teacher.TeacherDetail);
+            string Massage = "https://localhost:44398/Teacher/Detail/" + teacher.Id.ToString();
+            List<Subsciber> subscibers = _context.Subscibers.ToList();
+            foreach (Subsciber sub in subscibers)
+            {
+                await Helper.SendMessageAsync("New Teacher", Massage, sub.Email);
+            }
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
 
