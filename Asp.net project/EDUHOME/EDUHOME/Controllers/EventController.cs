@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace EDUHOME.Controllers
 {
+    //[Authorize(Roles = "Admin")]
     public class EventController : Controller
     {
         private readonly AppDbContext _context;

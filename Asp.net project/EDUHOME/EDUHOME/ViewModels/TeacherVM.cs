@@ -10,5 +10,7 @@ namespace EDUHOME.ViewModels
     {
         public Teacher Teacher { get; set; }
         public TeacherDetail TeacherDetail { get; set; }
+        public List<string> SkillName{ get; set; }
+        public List<int> SkillPercentage { get; set; }
     }
 }

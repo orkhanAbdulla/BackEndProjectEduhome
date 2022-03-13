@@ -16,11 +16,13 @@ namespace EDUHOME.Models
         public string ImageUrl { get; set; }
         public bool IsDeleted { get; set; }
         [Required,MaxLength(150)]
+        public int Rate { get; set; }
         public string Name { get; set; }
         [Required]
         public string Description { get; set; }
         public DetailCourse DetailCourse { get; set; }
         public string AppUserId { get; set; }
         public AppUser AppUser { get; set; }
+        public IList<Comment> Comments { get; set; }
     }
 }

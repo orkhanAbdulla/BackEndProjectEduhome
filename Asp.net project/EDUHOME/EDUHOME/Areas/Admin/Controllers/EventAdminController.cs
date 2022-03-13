@@ -16,7 +16,7 @@ using System.Threading.Tasks;
 namespace EDUHOME.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles = "Admin")]
+    //[Authorize(Roles = "Admin")]
     public class EventAdminController : Controller
     {
         private readonly AppDbContext _context;
@@ -108,13 +108,7 @@ namespace EDUHOME.Areas.Admin.Controllers
             }
             await _context.SaveChangesAsync();
 
-
             eventVM.EventDetail.EventId = eventVM.Event.Id;
-
-
-
-
-            
 
             foreach (int sp in eventVM.Speakers)
             {
@@ -124,11 +118,7 @@ namespace EDUHOME.Areas.Admin.Controllers
                 await _context.AddAsync(eventSpeaker);
                 await _context.SaveChangesAsync();
             }
-
-            
-
             _context.Update(eventVM.Event);
-
 
             await _context.EventDetail.AddAsync(eventVM.EventDetail);
             await _context.SaveChangesAsync();

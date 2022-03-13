@@ -64,37 +64,23 @@
                         <input asp-for="@Model.TeacherDetail.Skype" class="form-control" placeholder="Skype">
                         <span class="text-danger" asp-validation-for="@Model.TeacherDetail.Skype"></span>
                     </div>
-                    <div class="form-group">
-                        <label asp-for="@Model.TeacherDetail.Language"></label>
-                        <input type="range" asp-for="@Model.TeacherDetail.Language" class="form-control-range" placeholder="Language">
-                        <span class="text-danger" asp-validation-for="@Model.TeacherDetail.Language"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="@Model.TeacherDetail.Design"></label>
-                        <input type="range" asp-for="@Model.TeacherDetail.Design" class="form-control-range" placeholder="Design">
-                        <span class="text-danger" asp-validation-for="@Model.TeacherDetail.Design"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="@Model.TeacherDetail.TeamLeader"></label>
-                        <input type="range" asp-for="@Model.TeacherDetail.TeamLeader" class="form-control-range" placeholder="TeamLeader">
-                        <span class="text-danger" asp-validation-for="@Model.TeacherDetail.TeamLeader"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="@Model.TeacherDetail.Innovation"></label>
-                        <input type="range" asp-for="@Model.TeacherDetail.Innovation" class="form-control-range" placeholder="Innovation">
-                        <span class="text-danger" asp-validation-for="@Model.TeacherDetail.Innovation"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="@Model.TeacherDetail.Development"></label>
-                        <input type="range" asp-for="@Model.TeacherDetail.Development" class="form-control-range" placeholder="Development">
-                        <span class="text-danger" asp-validation-for="@Model.TeacherDetail.Development"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="@Model.TeacherDetail.Communication"></label>
-                        <input type="range" asp-for="@Model.TeacherDetail.Communication" class="form-control-range" placeholder="Communication">
-                        <span class="text-danger" asp-validation-for="@Model.TeacherDetail.Communication"></span>
-                    </div>
-
+                    @foreach (var item in Model.Skills)
+                    {
+                            <div id="TeachersSkills" class="border-primary">
+                                <div class="form-group">
+                                    <label asp-for="@item.Name"></label>
+                                    <input asp-for="@item.Name" class="form-control" placeholder="SkillName">
+                                    <span class="text-danger" asp-validation-for="@item.Name"></span>
+                                </div>
+                                <div class="form-group">
+                                    <div class="form-group">
+                                        <label asp-for="@item.Percentage"></label>
+                                        <input type="range" asp-for="@item.Percentage" class="form-control-range" placeholder="Innovation">
+                                        <span class="text-danger" asp-validation-for="@item.Percentage"></span>
+                                    </div>
+                                </div>
+                        </div>
+                    }
                     <button type="submit" class="btn btn-primary mr-2">Submit</button>
                     <a class="btn btn-light" asp-action="Index">Cancel</a>
                 </form>

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace EDUHOME.Controllers
 {
+    //[Authorize(Roles = "Admin")]
     public class ContactController : Controller
     {
         public IActionResult Index()

@@ -17,7 +17,7 @@ using System.Threading.Tasks;
 namespace EDUHOME.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles = "Moderator")]
+    //[Authorize(Roles = "Moderator")]
     public class CourseModeratorController : Controller
     {
         private readonly AppDbContext _context;

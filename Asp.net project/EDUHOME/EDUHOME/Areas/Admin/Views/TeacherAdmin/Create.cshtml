@@ -1,4 +1,4 @@
-﻿@model Teacher
+﻿@model TeacherVM
 @{
     ViewData["Title"] = "Create";
 }
@@ -10,19 +10,19 @@
                 <div class="text-danger" asp-validation-summary="ModelOnly"></div>
                 <form class="forms-sample" method="post" enctype="multipart/form-data">
                     <div class="form-group">
-                        <label asp-for="Photo">Select Image:</label>
-                        <input asp-for="Photo" class="form-control" accept="image/*">
-                        <span class="text-danger" asp-validation-for="Photo"></span>
+                        <label asp-for="Teacher.Photo">Select Image:</label>
+                        <input asp-for="Teacher.Photo" class="form-control" accept="image/*">
+                        <span class="text-danger" asp-validation-for="Teacher.Photo"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="Fullname"></label>
-                        <input asp-for="Fullname" class="form-control" placeholder="Fullname">
-                        <span class="text-danger" asp-validation-for="Fullname"></span>
+                        <label asp-for="Teacher.Fullname"></label>
+                        <input asp-for="Teacher.Fullname" class="form-control" placeholder="Fullname">
+                        <span class="text-danger" asp-validation-for="Teacher.Fullname"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="Position"></label>
-                        <input asp-for="Position" class="form-control" placeholder="Position">
-                        <span class="text-danger" asp-validation-for="Position"></span>
+                        <label asp-for="Teacher.Position"></label>
+                        <input asp-for="Teacher.Position" class="form-control" placeholder="Position">
+                        <span class="text-danger" asp-validation-for="Teacher.Position"></span>
                     </div>
                     <div class="form-group">
                         <label asp-for="TeacherDetail.AboutMe"></label>
@@ -64,40 +64,24 @@
                         <input asp-for="TeacherDetail.Skype" class="form-control" placeholder="Skype">
                         <span class="text-danger" asp-validation-for="TeacherDetail.Skype"></span>
                     </div>
-                    <div class="form-group">
-                        <label asp-for="TeacherDetail.Language"></label>
-                        <input type="range" asp-for="TeacherDetail.Language" class="form-control-range" placeholder="Language">
-                        <span class="text-danger" asp-validation-for="TeacherDetail.Language"></span>
+                    <div>
+                        <div id="TeachersSkills" class="border-primary">
+                            <div class="form-group">
+                                <label asp-for="SkillName"></label>
+                                <input asp-for="SkillName" class="form-control" placeholder="SkillName">
+                                <span class="text-danger" asp-validation-for="SkillName"></span>
+                            </div>
+                              <div class="form-group">
+                                    <label asp-for="SkillPercentage"></label>
+                                    <input type="range" asp-for="SkillPercentage" class="form-control-range" placeholder="Innovation">
+                                    <span class="text-danger" asp-validation-for="SkillPercentage"></span>
+                              </div>
+                            <button type="button" class="btn btn-outline-primary mb-5" id="SkillBtn">Add</button>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label asp-for="TeacherDetail.Design"></label>
-                        <input type="range" asp-for="TeacherDetail.Design" class="form-control-range" placeholder="Design">
-                        <span class="text-danger" asp-validation-for="TeacherDetail.Design"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="TeacherDetail.TeamLeader"></label>
-                        <input type="range" asp-for="TeacherDetail.TeamLeader" class="form-control-range" placeholder="TeamLeader">
-                        <span  class="text-danger" asp-validation-for="TeacherDetail.TeamLeader"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="TeacherDetail.Innovation"></label>
-                        <input type="range" asp-for="TeacherDetail.Innovation" class="form-control-range" placeholder="Innovation">
-                        <span class="text-danger" asp-validation-for="TeacherDetail.Innovation"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="TeacherDetail.Development"></label>
-                        <input type="range" asp-for="TeacherDetail.Development" class="form-control-range" placeholder="Development">
-                        <span class="text-danger" asp-validation-for="TeacherDetail.Development"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="TeacherDetail.Communication"></label>
-                        <input type="range" asp-for="TeacherDetail.Communication" class="form-control-range" placeholder="Communication">
-                        <span class="text-danger" asp-validation-for="TeacherDetail.Communication"></span>
-                    </div>
-
-                    <button type="submit" class="btn btn-primary mr-2">Submit</button>
-                    <a class="btn btn-light" asp-action="Index">Cancel</a>
-                </form>
+                        <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                        <a class="btn btn-light" asp-action="Index">Cancel</a>
+</form>
             </div>
         </div>
     </div>
@@ -111,6 +95,24 @@
                 console.error(error);
             });
     </script>
+   <script>
+       $(document).ready(function () {
+           $("#SkillBtn").click(function () {
+               $("#SkillBtn").before(`<div id="TeachersSkills" class="border-primary">
+                            <div class="form-group">
+                                <label for="SkillName">SkillName</label>
+                                <input class="form-control" placeholder="SkillName" type="text" id="SkillName" name="SkillName" value="">
+                                <span class="text-danger field-validation-valid" data-valmsg-for="SkillName" data-valmsg-replace="true"></span>
+                            </div>
+                          <div class="form-group">
+                                    <label for="SkillPercentage">SkillPercentage</label>
+                                    <input type="range" class="form-control-range" placeholder="Innovation" id="SkillPercentage" name="SkillPercentage" value="">
+                                    <span class="text-danger field-validation-valid" data-valmsg-for="SkillPercentage" data-valmsg-replace="true"></span>
+                                </div>
+                        </div>`)
+           })
+       })
+   </script>
     <partial name="_ValidationPartial" />
 
 }

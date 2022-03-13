@@ -1,4 +1,4 @@
-/*-----------------------------------------------------------------------------------
+﻿/*-----------------------------------------------------------------------------------
 
     Template Name: Eduhome - Educational HTML Template
     Template URI: https://devitems.com/html/education-preview/
@@ -45,7 +45,20 @@ body {
 	line-height: normal;
     font-family: 'Open Sans', sans-serif; 
 }
-.clear{clear:both}
+#comments .title {
+    margin-bottom: 20px;
+    font-size: 20px;
+}
+#comments .review{
+    margin-top:15px 0px 20px 0px;
+    
+}
+    #comments .review p{
+        padding:20px 0px 20px 0px
+    }
+    .clear {
+        clear: both
+    }
 .fix {overflow: hidden}
 .block {display: block}
 img{
@@ -2857,3 +2870,51 @@ textarea {
     border: 1px solid #EC1C23;
     color: #fff;
 }
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.rate {
+    float: left;
+    height: 46px;
+    padding: 0 10px;
+}
+
+    .rate:not(:checked) > input {
+        position: absolute;
+        top: -9999px;
+    }
+
+    .rate:not(:checked) > label {
+        float: right;
+        width: 1em;
+        overflow: hidden;
+        white-space: nowrap;
+        cursor: pointer;
+        font-size: 30px;
+        color: #ccc;
+    }
+
+        .rate:not(:checked) > label:before {
+            content: '★ ';
+        }
+
+    .rate > input:checked ~ label {
+        color: #ffc700;
+    }
+
+    .rate:not(:checked) > label:hover,
+    .rate:not(:checked) > label:hover ~ label {
+        color: #deb217;
+    }
+
+    .rate > input:checked + label:hover,
+    .rate > input:checked + label:hover ~ label,
+    .rate > input:checked ~ label:hover,
+    .rate > input:checked ~ label:hover ~ label,
+    .rate > label:hover ~ input:checked ~ label {
+        color: #c59b08;
+    }
+
+/* Modified from: https://github.com/mukulkant/Star-rating-using-pure-css */

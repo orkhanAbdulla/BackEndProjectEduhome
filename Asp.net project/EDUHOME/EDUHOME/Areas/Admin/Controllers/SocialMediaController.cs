@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 namespace EDUHOME.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles = "Admin")]
+    //[Authorize(Roles = "Admin")]
     public class SocialMediaController : Controller
     {
         private readonly AppDbContext _context;

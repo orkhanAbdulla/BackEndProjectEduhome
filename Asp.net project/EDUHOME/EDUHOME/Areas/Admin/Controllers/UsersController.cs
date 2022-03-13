@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 namespace EDUHOME.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles = "Admin,Moderator")]
+    //[Authorize(Roles = "Admin,Moderator")]
     public class UsersController : Controller
     {
         private readonly UserManager<AppUser> _userManager;
@@ -30,6 +30,18 @@ namespace EDUHOME.Areas.Admin.Controllers
         {
             List<AppUser> users = _userManager.Users.Where(x=>x.EmailConfirmed==true).ToList();
             List<UserVM> userVMs = new List<UserVM>();
+
+            //userVMs.AddRange(users.Select(user=>new UserVM
+            //{
+            //    Id= user.Id,
+            //    Name= user.Name,
+            //    Surname= user.Surname,
+            //    Email= user.Email,
+            //    IsDeleted= user.IsDeleted,
+            //    Role=(await _userManager.GetRolesAsync(user))[0]
+
+            //}));
+
             foreach (AppUser user in users)
             {
                 UserVM userVM = new UserVM
@@ -114,19 +126,18 @@ namespace EDUHOME.Areas.Admin.Controllers
                     List<Course> oldCourses = await _context.Courses.Where(x => x.AppUserId == id).ToListAsync();
                     foreach (Course course in oldCourses)
                     {
-                        course.AppUserId = null;
-                        await _context.SaveChangesAsync();
-
+                        appuser.courses.Remove(course);
                     }
+                    await _context.SaveChangesAsync();
                     foreach (int cId in courseId)
                     {
                         Course course = await _context.Courses.FirstOrDefaultAsync(x => x.Id == cId);
                         if (course == null)
                             return NotFound();
                         course.AppUserId = id;
-                        await _context.SaveChangesAsync();
                     }
-                    
+                    await _context.SaveChangesAsync();
+
                 }
             }
             else{

@@ -75,29 +75,32 @@
                                         Active
                                     </td>
                                 }
-                                <td>
-                                    <a class="btn btn-info" asp-action="Detail" asp-route-id="@cr.Id">
-                                        Detail
-                                    </a>
+                            <td>
+                                <a class="btn btn-info" asp-action="Detail" asp-route-id="@cr.Id">
+                                    Detail
+                                </a>
 
-                                    <a class="btn btn-warning" asp-action="Update" asp-route-id="@cr.Id">
-                                        Edit
-                                    </a>
-                                    
-                                    @if (cr.IsDeleted)
-                                    {
-                                        <a class="btn btn-success" asp-controller="CourseAdmin" asp-action="Delete" asp-route-id="@cr.Id">
-                                            Activated
-                                        </a>
-                                    }
-                                    else
-                                    {
-                                        <a class="btn btn-danger" asp-controller="CourseAdmin" asp-action="Delete" asp-route-id="@cr.Id">
-                                            Deactivated
-                                        </a>
-                                    }
+                                <a class="btn btn-warning" asp-action="Update" asp-route-id="@cr.Id">
+                                    Edit
+                                </a>
 
-                                </td>
+                                @if (cr.IsDeleted)
+                                {
+                                    <a class="btn btn-success" asp-controller="CourseAdmin" asp-action="Delete" asp-route-id="@cr.Id">
+                                        Activated
+                                    </a>
+                                }
+                                else
+                                {
+                                    <a class="btn btn-danger" asp-controller="CourseAdmin" asp-action="Delete" asp-route-id="@cr.Id">
+                                        Deactivated
+                                    </a>
+                                }
+                                <a class="btn btn-info" asp-action="Comments" asp-route-id="@cr.Id">
+                                    <i class="fas fa-comment"></i><span style="border-radius:50%" class="badge badge-light">@cr.Comments.Count()</span>
+                                </a>
+
+                            </td>
                             </tr>
                             }
                         </tbody>

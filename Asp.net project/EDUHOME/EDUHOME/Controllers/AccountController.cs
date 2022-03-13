@@ -15,6 +15,7 @@ using System.Threading.Tasks;
 
 namespace EDUHOME.Controllers
 {
+    //[Authorize(Roles = "Admin")]
     public class AccountController : Controller
     {
         private readonly AppDbContext _context;
@@ -108,7 +109,7 @@ namespace EDUHOME.Controllers
                 };
 
                 IdentityResult identityResult = await _userManager.CreateAsync(newuser, registerVM.Password);
-              
+                await _userManager.AddToRoleAsync(newuser, Roles.Member.ToString());
 
                 if (identityResult.Succeeded)
                 {
@@ -121,7 +122,7 @@ namespace EDUHOME.Controllers
                         $"</br><p>Qeydiyatı yalnız bir dəfə təsdiqləyə bilərsiz</p>";
                     var messageSubject = "Email Təsdiqləmə";
                     await Helper.SendMessageAsync(messageSubject,messageBody, newuser.Email);
-                    await _userManager.AddToRoleAsync(newuser, Roles.Admin.ToString());
+                    
 
                     return RedirectToAction("VerifyEmail","Account");
                 }

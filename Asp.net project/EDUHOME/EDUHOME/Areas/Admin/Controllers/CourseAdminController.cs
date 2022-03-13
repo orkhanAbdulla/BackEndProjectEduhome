@@ -5,6 +5,7 @@ using EDUHOME.Models;
 using EDUHOME.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -16,21 +17,23 @@ using System.Threading.Tasks;
 namespace EDUHOME.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles = "Admin")]
+    //[Authorize(Roles = "Admin")]
     public class CourseAdminController : Controller
     {
         private readonly AppDbContext _context;
         private readonly IWebHostEnvironment _env;
-        public CourseAdminController(AppDbContext context, IWebHostEnvironment env)
+        public readonly UserManager<AppUser> _userManager;
+        public CourseAdminController(AppDbContext context, IWebHostEnvironment env, UserManager<AppUser> userManager)
         {
             _context = context;
             _env = env;
+            _userManager = userManager;
         }
         public IActionResult Index()
         {
             //Where(x => x.AppUserId ==)
             ////ViewBag.IsDeleted = IsDeleted;
-            List<Course> courses = _context.Courses.OrderByDescending(x => x.Id).Include(c => c.DetailCourse).ToList();
+            List<Course> courses = _context.Courses.OrderByDescending(x => x.Id).Include(c => c.DetailCourse).Include(x=>x.Comments).ToList();
             return View(courses);
         }
         public IActionResult Detail(int? id)
@@ -78,9 +81,12 @@ namespace EDUHOME.Areas.Admin.Controllers
            
             string path = Path.Combine("img", "course");
             course.ImageUrl = await course.Photo.SavaFileAsync(_env.WebRootPath, path);
+
+
             course.DetailCourse.Course= course;
             course.DetailCourse.CourseId = course.Id;
             await _context.AddRangeAsync(course, course.DetailCourse);
+
             await _context.SaveChangesAsync();
             string Massage = "https://localhost:44398/Courses/Detail/" + course.Id.ToString();
             List<Subsciber> subscibers = _context.Subscibers.ToList();
@@ -163,6 +169,48 @@ namespace EDUHOME.Areas.Admin.Controllers
 
             return RedirectToAction(nameof(Index));
         }
-     
+        public IActionResult Comments(int Id)
+        {
+            List<Comment> commnets = _context.Comments.Include(x => x.AppUser).Where(x => x.CourseId == Id).ToList();
+            return View(commnets);
+        }
+        public IActionResult CommentAccept(int id)
+        {
+            Comment comment = _context.Comments.Find(id);
+            if (comment == null) return NotFound();
+            comment.Status = true;
+            Course course = _context.Courses.Include(x => x.Comments).FirstOrDefault(x => x.Id == comment.CourseId);
+            if (course.Comments.Where(x => x.Status == true).Count() == 0)
+            {
+                course.Rate = 0;
+            }
+            else
+            {
+                course.Rate = (int)Math.Round(course.Comments.Where(x => x.Status == true).Average(x => x.Rate));
+            }
+            _context.SaveChanges();
+            return RedirectToAction("Comments", new { Id = comment.CourseId });
+        }
+        public IActionResult CommentReject(int id)
+        {
+            Comment comment = _context.Comments.Find(id);
+            if (comment == null) return NotFound();
+            comment.Status = false;
+            _context.SaveChanges();
+            Course course = _context.Courses.Include(x => x.Comments).FirstOrDefault(x => x.Id == comment.CourseId);
+            if (course.Comments.Where(x => x.Status == true).Count() == 0)
+            {
+                course.Rate = 0;
+            }
+            else
+            {
+                course.Rate = (int)Math.Round(course.Comments.Where(x => x.Status == true).Average(x => x.Rate));
+            }
+            _context.SaveChanges();
+            return RedirectToAction("Comments", new { Id = comment.CourseId });
+        }
+
+
+
     }
 }

@@ -2,6 +2,7 @@
 using EDUHOME.Extensions;
 using EDUHOME.Helpers;
 using EDUHOME.Models;
+using EDUHOME.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -15,7 +16,7 @@ using System.Threading.Tasks;
 namespace EDUHOME.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles = "Admin")]
+    //[Authorize(Roles = "Admin")]
     public class TeacherAdminController : Controller
     {
         private readonly AppDbContext _context;
@@ -55,33 +56,41 @@ namespace EDUHOME.Areas.Admin.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Teacher teacher)
+        public async Task<IActionResult> Create(TeacherVM teacherVM)
         {
+
+            teacherVM.Teacher.Skills= new List<Skill>();
+
             if (!ModelState.IsValid) return View();
 
-            if (!teacher.Photo.IsValidType("image/"))
+            if (!teacherVM.Teacher.Photo.IsValidType("image/"))
             {
                 ModelState.AddModelError("Photo", "Please select image Type");
                 return View();
             }
-            if (!teacher.Photo.IsValidSize(300))
+            if (!teacherVM.Teacher.Photo.IsValidSize(900))
             {
                 ModelState.AddModelError("Photo", "Please select image Size less than kb");
                 return View();
             }
             string path = Path.Combine("img", "teacher");
-            teacher.ImageUrl = await teacher.Photo.SavaFileAsync(_env.WebRootPath, path);
 
-            teacher.TeacherDetail.Teacher = teacher;
-            teacher.TeacherDetail.TeacherId = teacher.Id;
+            teacherVM.Teacher.ImageUrl = await teacherVM.Teacher.Photo.SavaFileAsync(_env.WebRootPath, path);
+            teacherVM.TeacherDetail.Teacher = teacherVM.Teacher;
+            teacherVM.TeacherDetail.TeacherId = teacherVM.Teacher.Id;
 
-            await _context.AddRangeAsync(teacher, teacher.TeacherDetail);
-            string Massage = "https://localhost:44398/Teacher/Detail/" + teacher.Id.ToString();
-            List<Subsciber> subscibers = _context.Subscibers.ToList();
-            foreach (Subsciber sub in subscibers)
+            for (int i = 0; i < teacherVM.SkillName.Count; i++)
             {
-                await Helper.SendMessageAsync("New Teacher", Massage, sub.Email);
+                teacherVM.Teacher.Skills.Add(new Skill { Name = teacherVM.SkillName[i], Percentage = teacherVM.SkillPercentage[i], TeacherId= teacherVM.Teacher.Id});
             }
+            await _context.AddRangeAsync(teacherVM.Teacher, teacherVM.TeacherDetail);
+            //string Massage = "https://localhost:44398/Teacher/Detail/" + teacherVM.Teacher.Id.ToString();
+            //List<Subsciber> subscibers = _context.Subscibers.ToList();
+            //foreach (Subsciber sub in subscibers)
+            //{
+            //    await Helper.SendMessageAsync("New Teacher", Massage, sub.Email);
+            //}
+           
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
 
@@ -89,8 +98,10 @@ namespace EDUHOME.Areas.Admin.Controllers
         public IActionResult Update(int? id)
         {
             if (id == null) return NotFound();
-            Teacher teacher = _context.Teachers.Include(t => t.TeacherDetail).Include(t => t.socials).FirstOrDefault(t => t.Id == id);
+            Teacher teacher = _context.Teachers.Include(t => t.TeacherDetail).Include(t => t.socials).Include(x=>x.Skills).FirstOrDefault(t => t.Id == id);
             if (teacher == null) return NotFound();
+            
+           
             return View(teacher);
           
         }
@@ -101,7 +112,7 @@ namespace EDUHOME.Areas.Admin.Controllers
             if (id == null) return NotFound();
             if (!ModelState.IsValid) return NotFound();
 
-            Teacher teacherDb = _context.Teachers.Include(t => t.TeacherDetail).Include(t => t.socials).FirstOrDefault(t => t.Id == id);
+            Teacher teacherDb = _context.Teachers.Include(t => t.TeacherDetail).Include(t => t.socials).Include(x=>x.Skills).FirstOrDefault(t => t.Id == id);
             if (teacherDb == null) return NotFound();
             if (!teacher.Photo.IsValidType("image/"))
             {
@@ -127,12 +138,16 @@ namespace EDUHOME.Areas.Admin.Controllers
             teacherDb.TeacherDetail.MailMe = teacher.TeacherDetail.MailMe;
             teacherDb.TeacherDetail.Call = teacher.TeacherDetail.Call;
             teacherDb.TeacherDetail.Skype = teacher.TeacherDetail.Skype;
-            teacherDb.TeacherDetail.Language = teacher.TeacherDetail.Language;
-            teacherDb.TeacherDetail.Design = teacher.TeacherDetail.Design;
-            teacherDb.TeacherDetail.TeamLeader = teacher.TeacherDetail.TeamLeader;
-            teacherDb.TeacherDetail.Innovation = teacher.TeacherDetail.Innovation;
-            teacherDb.TeacherDetail.Development = teacher.TeacherDetail.Development;
-            teacherDb.TeacherDetail.Communication = teacher.TeacherDetail.Communication;
+            foreach (var skill in teacher.Skills)
+            {
+                foreach (var Dbskill in teacherDb.Skills)
+                {
+                    Dbskill.Name = skill.Name;
+                    Dbskill.Percentage = skill.Percentage;
+                }
+            }
+
+
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));

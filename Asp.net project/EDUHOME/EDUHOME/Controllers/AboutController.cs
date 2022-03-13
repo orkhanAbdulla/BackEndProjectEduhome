@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace EDUHOME.Controllers
 {
+   
     public class AboutController : Controller
     {
         public IActionResult Index()

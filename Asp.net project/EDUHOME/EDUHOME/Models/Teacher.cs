@@ -21,6 +21,7 @@ namespace EDUHOME.Models
         public string Position { get; set; }
         public TeacherDetail TeacherDetail { get; set; }
         public List<Social> socials { get; set; }
+        public IList<Skill> Skills { get; set; }
 
 
     }

@@ -29,6 +29,32 @@
     <Compile Remove="Migrations\20210518202349_ChangeTeacherRelation.Designer.cs" />
     <Compile Remove="Migrations\20210519075339_ChangeTeacherTable.cs" />
     <Compile Remove="Migrations\20210519075339_ChangeTeacherTable.Designer.cs" />
+    <Compile Remove="Migrations\20220308163648_AddSkillTable.cs" />
+    <Compile Remove="Migrations\20220308163648_AddSkillTable.Designer.cs" />
+    <Compile Remove="Migrations\20220308163906_AddTableSkill.cs" />
+    <Compile Remove="Migrations\20220308163906_AddTableSkill.Designer.cs" />
+    <Compile Remove="Migrations\20220309195643_CommentsTableCreated.cs" />
+    <Compile Remove="Migrations\20220309195643_CommentsTableCreated.Designer.cs" />
+    <Compile Remove="Migrations\20220309201211_CreateCommentsTable.cs" />
+    <Compile Remove="Migrations\20220309201211_CreateCommentsTable.Designer.cs" />
+    <Compile Remove="Migrations\20220309201231_CreateCommentTable.cs" />
+    <Compile Remove="Migrations\20220309201231_CreateCommentTable.Designer.cs" />
+    <Compile Remove="Migrations\20220309202745_CreateCommentTable.cs" />
+    <Compile Remove="Migrations\20220309202745_CreateCommentTable.Designer.cs" />
+    <Compile Remove="Migrations\20220309202949_CreateCommentTable.cs" />
+    <Compile Remove="Migrations\20220309202949_CreateCommentTable.Designer.cs" />
+    <Compile Remove="Migrations\20220310081814_CreateCommentTable.cs" />
+    <Compile Remove="Migrations\20220310081814_CreateCommentTable.Designer.cs" />
+    <Compile Remove="Migrations\20220310085950_CreateCommentTableAddPropertyRateTableCourse.cs" />
+    <Compile Remove="Migrations\20220310085950_CreateCommentTableAddPropertyRateTableCourse.Designer.cs" />
+    <Compile Remove="Migrations\20220310111950_CommenTableChangePropertyStatus.cs" />
+    <Compile Remove="Migrations\20220310111950_CommenTableChangePropertyStatus.Designer.cs" />
+    <Compile Remove="Migrations\20220310112437_ChangeCommentTable.cs" />
+    <Compile Remove="Migrations\20220310112437_ChangeCommentTable.Designer.cs" />
+    <Compile Remove="Migrations\20220310190743_ChangeCommentTable.cs" />
+    <Compile Remove="Migrations\20220310190743_ChangeCommentTable.Designer.cs" />
+    <Compile Remove="Migrations\20220310190930_ChangeCommentTable.cs" />
+    <Compile Remove="Migrations\20220310190930_ChangeCommentTable.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

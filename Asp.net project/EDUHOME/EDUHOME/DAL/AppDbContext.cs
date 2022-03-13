@@ -26,6 +26,10 @@ namespace EDUHOME.DAL
         public DbSet<Blog> Blogs { get; set; }
         public DbSet<BlogDetail> BlogDetail { get; set; }
         public DbSet<Subsciber> Subscibers  { get; set; }
+        public DbSet<Skill> Skills { get; set; }
+        public DbSet<Comment> Comments { get; set; }
+
+        
 
 
 

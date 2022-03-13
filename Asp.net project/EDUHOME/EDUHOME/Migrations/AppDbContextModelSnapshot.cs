@@ -168,6 +168,42 @@ namespace EDUHOME.Migrations
                     b.ToTable("BlogDetail");
                 });
 
+            modelBuilder.Entity("EDUHOME.Models.Comment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("AppUserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("CourseId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Messgae")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Rate")
+                        .HasColumnType("int");
+
+                    b.Property<bool?>("Status")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AppUserId");
+
+                    b.HasIndex("CourseId");
+
+                    b.ToTable("Comments");
+                });
+
             modelBuilder.Entity("EDUHOME.Models.Course", b =>
                 {
                     b.Property<int>("Id")
@@ -189,8 +225,10 @@ namespace EDUHOME.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(150)")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Rate")
+                        .HasColumnType("int")
                         .HasMaxLength(150);
 
                     b.HasKey("Id");
@@ -341,6 +379,30 @@ namespace EDUHOME.Migrations
                     b.ToTable("EventSpeakers");
                 });
 
+            modelBuilder.Entity("EDUHOME.Models.Skill", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Percentage")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TeacherId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TeacherId");
+
+                    b.ToTable("Skills");
+                });
+
             modelBuilder.Entity("EDUHOME.Models.Slider", b =>
                 {
                     b.Property<int>("Id")
@@ -471,17 +533,8 @@ namespace EDUHOME.Migrations
                     b.Property<string>("Call")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Communication")
-                        .HasColumnType("int");
-
                     b.Property<string>("Degree")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Design")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Development")
-                        .HasColumnType("int");
 
                     b.Property<string>("Experience")
                         .HasColumnType("nvarchar(max)");
@@ -492,12 +545,6 @@ namespace EDUHOME.Migrations
                     b.Property<string>("Hobbies")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Innovation")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Language")
-                        .HasColumnType("int");
-
                     b.Property<string>("MailMe")
                         .HasColumnType("nvarchar(max)");
 
@@ -505,9 +552,6 @@ namespace EDUHOME.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("TeacherId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TeamLeader")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -658,6 +702,21 @@ namespace EDUHOME.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("EDUHOME.Models.Comment", b =>
+                {
+                    b.HasOne("EDUHOME.Models.AppUser", "AppUser")
+                        .WithMany()
+                        .HasForeignKey("AppUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("EDUHOME.Models.Course", "Course")
+                        .WithMany("Comments")
+                        .HasForeignKey("CourseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("EDUHOME.Models.Course", b =>
                 {
                     b.HasOne("EDUHOME.Models.AppUser", "AppUser")
@@ -694,6 +753,15 @@ namespace EDUHOME.Migrations
                     b.HasOne("EDUHOME.Models.Speaker", "Speaker")
                         .WithMany("EventSpeakers")
                         .HasForeignKey("SpeakerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("EDUHOME.Models.Skill", b =>
+                {
+                    b.HasOne("EDUHOME.Models.Teacher", "Teacher")
+                        .WithMany("Skills")
+                        .HasForeignKey("TeacherId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

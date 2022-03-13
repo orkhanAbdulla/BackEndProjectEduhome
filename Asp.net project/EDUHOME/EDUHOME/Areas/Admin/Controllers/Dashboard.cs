@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace EDUHOME.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles = "Admin,Moderator")]
+    //[Authorize(Roles = "Admin,Moderator")]
     public class DashboardController : Controller
     {
         public IActionResult Index()

@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace EDUHOME.Controllers
 {
+    
     public class HomeController : Controller
     {
         private readonly AppDbContext _context;

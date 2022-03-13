@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\hp\\Desktop\\Edu\\BackEndProjectEduhome\\Asp.net project\\EDUHOME\\EDUHOME\\EDUHOME.csproj": {}
+    "C:\\Users\\hp\\Desktop\\Asp.net\\Edu\\BackEndProjectEduhome\\Asp.net project\\EDUHOME\\EDUHOME\\EDUHOME.csproj": {}
   },
   "projects": {
-    "C:\\Users\\hp\\Desktop\\Edu\\BackEndProjectEduhome\\Asp.net project\\EDUHOME\\EDUHOME\\EDUHOME.csproj": {
+    "C:\\Users\\hp\\Desktop\\Asp.net\\Edu\\BackEndProjectEduhome\\Asp.net project\\EDUHOME\\EDUHOME\\EDUHOME.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\hp\\Desktop\\Edu\\BackEndProjectEduhome\\Asp.net project\\EDUHOME\\EDUHOME\\EDUHOME.csproj",
+        "projectUniqueName": "C:\\Users\\hp\\Desktop\\Asp.net\\Edu\\BackEndProjectEduhome\\Asp.net project\\EDUHOME\\EDUHOME\\EDUHOME.csproj",
         "projectName": "EDUHOME",
-        "projectPath": "C:\\Users\\hp\\Desktop\\Edu\\BackEndProjectEduhome\\Asp.net project\\EDUHOME\\EDUHOME\\EDUHOME.csproj",
+        "projectPath": "C:\\Users\\hp\\Desktop\\Asp.net\\Edu\\BackEndProjectEduhome\\Asp.net project\\EDUHOME\\EDUHOME\\EDUHOME.csproj",
         "packagesPath": "C:\\Users\\hp\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\hp\\Desktop\\Edu\\BackEndProjectEduhome\\Asp.net project\\EDUHOME\\EDUHOME\\obj\\",
+        "outputPath": "C:\\Users\\hp\\Desktop\\Asp.net\\Edu\\BackEndProjectEduhome\\Asp.net project\\EDUHOME\\EDUHOME\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -79,7 +79,7 @@
           "downloadDependencies": [
             {
               "name": "Microsoft.NETCore.App.Host.win-x64",
-              "version": "[3.1.13, 3.1.13]"
+              "version": "[3.1.18, 3.1.18]"
             }
           ],
           "frameworkReferences": {
@@ -90,7 +90,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.104\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.303\\RuntimeIdentifierGraph.json"
         }
       }
     }
